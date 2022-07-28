@@ -1,0 +1,106 @@
+﻿@model DataObjects.Volunteer
+
+@{
+    ViewBag.Title = Model.GivenName + Model.FamilyName + " Details";
+    Model.UserPhoto = Model.GivenName.ToLower() + ".jpg";
+}
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+<div class="col w-100">
+    <div class="flex-row mt-4">
+        <div class="flex-column col-2">
+            @Html.Partial("VolunteerNavBar", Model.UserID)
+        </div>
+        <div class="col-10 d-flex flex-row justify-content-evenly">
+            @Html.ValidationMessage("", new { @class = "text-danger" })
+            <h2 class="mt-4">@Html.DisplayFor(model => model.GivenName) @Html.DisplayFor(model => model.FamilyName)</h2>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            @if (Model.Rating == 0)
+            {
+                <p>No Rating yet</p>
+            }
+            else
+            {
+                switch (Model.Rating)
+                {
+                    case 0:
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        break;
+                    case 1:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        break;
+                    case 2:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        break;
+                    case 3:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        break;
+                    case 4:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        break;
+                    case 5:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        break;
+                }
+            }
+        </div>
+        <div class="d-flex flex-row justify-content-center align-content-center text-center align-items-center centerr">
+            <div class="col-md-9 col-sm-12">
+                <div class="row">
+                    <div>
+                        <div class="d-flex flex-row">
+                        </div>
+                        @if (!(Model.UserDescription is null || Model.UserDescription.Length == 0))
+                        {
+                            <textarea readonly class="w-75">@Html.DisplayFor(model => model.UserDescription)</textarea>
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <p>Contact Info: &nbsp;@Html.DisplayFor(model => model.Email)</p>
+                </div>
+
+                <div class="row">
+                    <p>Location: &nbsp; @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) </p>
+                </div>
+                @if (User.IsInRole("Event Planner"))
+                {
+                    <div class="row">
+                        <span class="mx-auto mt-4 btn btn-outline-dark w-50">
+
+                            <a href="/Volunteer/CreateReview?volunteerID=@Model.VolunteerID">Leave a Review</a>
+
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

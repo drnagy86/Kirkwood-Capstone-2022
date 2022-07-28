@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="d-flex flex-column min-vh-100">
+    @*Nav var inspired by https://bootswatch.com/*@
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a href="" class="navbar-brand">Tadpole Events</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Events
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("List of Events", "EventList", "Event", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                            @Html.ActionLink("Create an Event", "EventCreate", "EventCreate", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        </ul>
+
+                        @*@Html.ActionLink("Events", "EventList", "Event", routeValues: null, htmlAttributes: new { @class = "nav-link" })*@
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Suppliers", "ViewSuppliers", "Supplier", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Locations", "ViewLocations", "Location", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Volunteers
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropDown">
+                            @Html.ActionLink("Apply To Volunteer", "VolunteerApplication", "VolunteerApplication", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                            @Html.ActionLink("View Volunteers", "ViewVolunteers", "Volunteer", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        </ul>
+                        </li>
+
+                        @*<li class="nav-item">
+                @Html.ActionLink("Create", "EventCreate", "EventCreate", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+            </li>*@
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-bar 3</a>*@
+                        @Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                <li>@Html.ActionLink("User Administration", "Index", "Admin", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Supplier Applications", "ViewSupplierApplications", "Supplier", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                     }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <main flex-shrink-0>
+            <div class="container">
+                @if (TempData["errorMessage"] != null)
+                {
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong class="text-white">Oh, no! There was an error.</strong>
+                        <p class="text-white">@TempData["errorMessage"]</p>
+                    </div>
+                }
+                @if (TempData["successMessage"] != null)
+                {
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong class="text-white">Good news!</strong>
+                        <p class="text-white">@TempData["successMessage"]</p>
+                    </div>
+                }
+                @RenderBody()
+
+            </div>
+        </main>
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <span class="text-dark">Created by the Dev Team for the Software Development Capstone at Kirkwood Community College, 2022</span>
+            </div>
+        </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/scripts")
+
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

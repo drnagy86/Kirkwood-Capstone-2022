@@ -1,0 +1,116 @@
+﻿@model DataObjects.EventVM
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@{
+    ViewBag.Title = "Add Location";
+
+
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var loggedInUser = userManager.FindById(User.Identity.GetUserId());
+}
+<div class="d-flex justify-content-center mt-5 w-75"><h2>Create Event</h2></div>
+<div class="col-md-2"></div>
+<div class="w-75 ms-5"><h4 class="w-75 ms-5">Add Dates</h4></div>
+<div class="container">
+
+    <div class="row justify-content-center w-100">
+
+        @using (Html.BeginForm("AddLocation", "EventCreate", FormMethod.Post))
+        {
+            <div class="d-flex justify-content-center">
+                <fieldset class="w-100">
+                    @Html.Hidden("user", loggedInUser)
+                    @Html.HiddenFor(m => m.EventID)
+                    @Html.HiddenFor(m => m.EventName)
+
+
+                    <div class="row w-75 justify-content-center">
+                        <div class="col-md-6">
+                            <span>
+                                @Html.CheckBox("locationDrop", false, new { id = "locationDrop" })<label class="ps-1">Select from verified locations</label>
+                                @Html.DropDownList("LocationList", null, "Select a location", new { id = "locations", onChange = "changed();", @class = "w-75 visually-hidden" })
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group m-1">
+                        <div class="row mx-sm-auto">
+                            <label class="col-md-2 col-form-label text-md-end">Name</label>
+                            <span class="col-md-6">@Html.TextBoxFor(m => m.Location.Name, new { @class = "form-control", id = "name" })</span>
+                        </div>
+
+                        <div class="row mx-sm-auto height-30px">
+                            <span class="col-md-2"> </span>
+                            <span class="text-danger col ">@Html.ValidationMessageFor(m => m.Location.Name)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-1">
+                        <div class="row mx-sm-auto">
+                            <label class="col-md-2 col-form-label text-md-end">City</label>
+                            <span class="col-md-6">@Html.TextBoxFor(m => m.Location.City, new { @class = "form-control", id = "city" })</span>
+                        </div>
+
+                        <div class="row mx-sm-auto height-30px">
+                            <span class="col-md-2"> </span>
+                            <span class="text-danger col ">@Html.ValidationMessageFor(m => m.Location.City)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-1" id="st">
+                        <div class="row mx-sm-auto">
+                            <label class="col-md-2 col-form-label text-md-end">State</label>
+                            <span class="col-md-6">@Html.TextBoxFor(m => m.Location.State, new { @class = "form-control", id = "state" })</span>
+                        </div>
+
+                        <div class="row mx-sm-auto height-30px">
+                            <span class="col-md-2"> </span>
+                            <span class="text-danger col ">@Html.ValidationMessageFor(m => m.Location.State)</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group m-1" id="ad">
+                        <div class="row mx-sm-auto">
+                            <label class="col-md-2 col-form-label text-md-end">Address</label>
+                            <span class="col-md-6">@Html.TextBoxFor(m => m.Location.Address1, new { @class = "form-control", id = "address" })</span>
+                        </div>
+
+                        <div class="row mx-sm-auto height-30px">
+                            <span class="col-md-2"> </span>
+                            <span class="text-danger col ">@Html.ValidationMessageFor(m => m.Location.Address1)</span>
+                        </div>
+                    </div>
+
+                    <div id="zipContainer">
+                        <div class="form-group m-1" id="txtZip">
+
+                            <div class="row mx-sm-auto">
+                                <label class="col-md-2 col-form-label text-md-end">Zip Code</label>
+                                <span class="col-md-6">@Html.TextBoxFor(m => m.Location.ZipCode, new { @class = "form-control", id = "zip" })</span>
+                            </div>
+
+                            <div class="row mx-sm-auto height-30px">
+                                <span class="col-md-2"> </span>
+                                <span class="text-danger col ">@Html.ValidationMessageFor(m => m.Location.ZipCode)</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex justify-content-center w-75">
+                        <div class="d-flex justify-content-center w-50">
+                            <div class="flex-row ms-2 me-5">
+                                <input value="add" type="submit" class="btn btn-primary" />
+                            </div>
+                            <div class="flex-row ms-5">
+                                @Html.ActionLink("Cancel", "EventList", "Event", routeValues: null, htmlAttributes: new { @class = "btn btn-danger", onclick = "return confirm('Are sure want to cancel?');" })
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        }
+    </div>
+</div>

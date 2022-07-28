@@ -1,0 +1,63 @@
+﻿@model MVCPresentation.Models.SupplierServiceEditModel
+@{
+    ViewBag.Title = "Edit Sublocation";
+}
+
+<h2>Details</h2>
+
+<div>
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+    @using (Html.BeginForm("EditSupplierService", "Supplier", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <dl class="dl-horizontal">
+            @Html.HiddenFor(model => model.ServiceName)
+            @Html.HiddenFor(model => model.SupplierID)
+            @Html.HiddenFor(model => model.ServiceID)
+            @Html.HiddenFor(model => model.Description)
+            @Html.HiddenFor(model => model.Price)
+            @Html.HiddenFor(model => model.ServiceImagePath)
+            <dt>
+                @Html.DisplayNameFor(model => model.NewName)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.NewName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NewName, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NewPrice)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.NewPrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NewDescription)
+            </dt>
+
+            <dd>
+                @Html.TextAreaFor(model => model.NewDescription, new
+                {
+                    @class = "form-control",
+                    rows = 5
+                })
+                @Html.ValidationMessageFor(model => model.NewDescription, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                <label>Image</label>
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.NewImage, new { type = "file", @class = "form-control", accept = ".jpg,.gif,.png,.apng,.svg,.bmp" })
+            </dd>
+        </dl>
+
+        <input type="submit" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "ViewSupplierServices", new { supplierID = Model.SupplierID }, new { onclick = "return confirm('This will discard any changes you have made. Continue?');", @class = "btn btn-danger" })
+    }
+
+</div>

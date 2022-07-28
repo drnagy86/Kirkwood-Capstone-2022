@@ -1,0 +1,130 @@
+﻿@model MVCPresentation.Models.EditSupplierModel
+
+@{
+    ViewBag.Title = "CreateSupplier";
+}
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@using DataObjects;
+
+@{
+    ViewBag.Title = "Create Supplier";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var loggedInUser = userManager.FindById(User.Identity.GetUserId());
+}
+
+
+
+<div class="d-flex justify-content-center w-100 pt-3">
+    <h2>Edit Supplier</h2>
+</div>
+<div class="d-flex justify-content-center w-100">
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+</div>
+<div class="d-flex justify-content-center w-100">
+    <hr />
+
+    @using (Html.BeginForm("EditSupplier", "Supplier", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.Address1)
+        @Html.HiddenFor(model => model.Address2)
+        @Html.HiddenFor(model => model.Approved)
+        @Html.HiddenFor(model => model.City)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.Phone)
+        @Html.HiddenFor(model => model.State)
+        @Html.HiddenFor(model => model.SupplierID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.ZipCode)
+        @Html.AntiForgeryToken()
+
+        @Html.LabelFor(model => model.NewName, htmlAttributes: new { @class = "control-label pt-2" })
+
+        @Html.TextBoxFor(model => model.NewName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NewName, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group pt-4">
+            @Html.LabelFor(model => model.NewDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.TextAreaFor(model => model.NewDescription, new { @class = "form-control", rows = "5" })
+            @Html.ValidationMessageFor(model => model.NewDescription, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex justify-content-between w-100">
+            <div class="form-group pt-4">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.NewEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group ps-4 pt-4">
+                @Html.LabelFor(model => model.NewPhone, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.NewPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewPhone, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group pt-4">
+            @Html.LabelFor(model => model.NewAddress1, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.NewAddress1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewAddress1, "", new { @class = "text-danger" })
+
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-start pt-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewState, htmlAttributes: new { @class = "control-label" })
+                <div style="width:100px;">
+                    @Html.DropDownListFor(model => model.NewState, new SelectList(Enum.GetValues(typeof(State))), new { @class = "form-select" })
+                </div>
+            </div>
+
+            <div class="form-group ps-4 w-100">
+                @Html.LabelFor(model => model.NewCity, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.NewCity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewCity, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+        <div class="form-group w-50 pt-4">
+            @Html.LabelFor(model => model.NewZipCode, htmlAttributes: new { @class = "control-label" })
+
+            @Html.EditorFor(model => model.NewZipCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewZipCode, "", new { @class = "text-danger" })
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-center w-100 pt-5">
+
+            <div class="flex-row pe-2">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+            <div class="flex-row ps-2">
+                @Html.ActionLink("Cancel", "ViewSuppliers", "Supplier", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+
+    }
+</div>

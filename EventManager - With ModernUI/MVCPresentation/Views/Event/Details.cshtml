@@ -1,0 +1,68 @@
+﻿@model DataObjects.EventVM
+@{
+    ViewBag.Title = Model.EventName + " Details";
+    ViewBag.EventId = Model.EventID;
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+    string eventName = Model.EventName;
+}
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+<div class="col w-100">
+    <div class="d-flex flex-row justify-content-center">
+        <h2 class="mt-4">@Html.DisplayFor(model => model.EventName)</h2>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("EventNavBar", Model.EventID)
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="d-flex flex-column justify-content-between">
+                @if (User.IsInRole("Event Planner") || User.IsInRole("Administrator"))
+                {
+                    <div class="d-flex flex-row">
+                        <h4>About @Model.EventName</h4>
+                        @Html.ActionLink("Cancel Event", "Deactivate", "Event", new { eventID = Model.EventID }, new { @class = "btn btn-danger offset-7", onclick = "return confirm('Are sure want to delete this event?');" })
+                    </div>
+                }
+                else
+                {
+                    <h4>About @Model.EventName</h4>
+                }
+                <div class="d-flex flex-row">
+                    <p>Created on&nbsp;@Model.EventCreatedDate.ToString("d")</p>
+                </div>
+
+                <textarea readonly class="w-75">@Html.DisplayFor(model => model.EventDescription)</textarea>
+                <h4 class="mt-3">Location: </h4>
+                @if (Model.LocationID == null || Model.Location.LocationID == 0)
+                {
+                    <p>This event has not set a location yet.</p>
+                }
+                else
+                {
+                    @Html.ActionLink(Model.Location.Name, "ViewLocationDetails", "Location", new { locationID = Model.LocationID }, null)
+                }
+
+                @if (Model.EventDates != null && Model.EventDates.Count > 0)
+                {
+                    <p>This event is taking place on the following dates:</p>
+                    for (int i = 0; i < Model.EventDates.Count - 1; i++)
+                    {
+                        <p>
+                            @Model.EventDates.ElementAt(i).EventDateID.ToShortDateString(),
+                        </p>
+                    }
+                    <p>@Model.EventDates.ElementAt(Model.EventDates.Count - 1).EventDateID.ToShortDateString()</p>
+                    <p>See the itinerary for more information</p>
+                }
+                else
+                {
+                    <p>This event does not have a date decided yet.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

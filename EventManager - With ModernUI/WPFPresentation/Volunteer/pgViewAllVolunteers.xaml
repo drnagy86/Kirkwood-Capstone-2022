@@ -1,0 +1,51 @@
+﻿<Page x:Class="WPFPresentation.pgViewAllVolunteers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ViewAllVolunteers" WindowTitle="View Volunteers" Loaded="Page_Loaded">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="txtBlkVolunteerList" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}">Volunteers</TextBlock>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <DataGrid x:Name="datVolunteers" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" IsSynchronizedWithCurrentItem="True" HorizontalContentAlignment="Center" MinColumnWidth="100" SelectionMode="Single" Padding="0" OverridesDefaultStyle="True" Foreground="Black" MouseDoubleClick="datVolunteers_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding GivenName}"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding FamilyName}"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding State}"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding City}"/>
+                        <DataGridTextColumn Header="Volunteer Type" Binding="{Binding VolunteerType}"/>
+                        <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Can be used if we decide to use paging -->
+                <!--<Button x:Name="btnPrev" Grid.Row="0" Grid.Column="0" Margin="40,5" Content="Previous" IsTabStop="False" HorizontalAlignment="Right"/>
+                <Button x:Name="btnNext" Grid.Row="0" Grid.Column="1" Margin="40,5" Content="Next" HorizontalAlignment="Left"/>-->
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,112 @@
+﻿@model DataObjects.Supplier
+
+@{
+    ViewBag.Title = "CreateSupplier";
+}
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@using DataObjects;
+
+@{
+    ViewBag.Title = "Create Supplier";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var loggedInUser = userManager.FindById(User.Identity.GetUserId());
+}
+
+
+<div class="pt-5 d-flex justify-content-end w-50 pe-3">
+    <h2>Create Supplier</h2>
+</div>
+<div class="d-flex justify-content-center w-100">
+    @using (Html.BeginForm("CreateSupplier", "Supplier", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label pt-2" })
+
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group pt-4">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "5" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+         </div>
+
+            <div class="d-flex justify-content-between w-100">
+                <div class="form-group pt-4">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group ps-4 pt-4">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group pt-4">
+                @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+
+            <div class="d-flex justify-content-start pt-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label" })
+                    <div style="width:100px;">
+                        @Html.DropDownListFor(model => model.State, new SelectList(Enum.GetValues(typeof(State))), new { @class = "form-select" })
+                    </div>
+                </div>
+
+                <div class="form-group ps-4 w-100">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+
+            <div class="form-group w-50 pt-4">
+                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+            </div>
+
+
+
+
+            <div class="d-flex justify-content-center w-100 pt-5">
+
+                <div class="flex-row pe-2">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <div class="flex-row ps-2">
+                    @Html.ActionLink("Cancel", "ViewSuppliers", "Supplier", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+
+            }
+        </div>

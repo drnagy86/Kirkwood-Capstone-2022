@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MVCPresentation.Models.DeveloperViewModel>
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>2022 Software Development Capstone Team</h3>
+
+<dl class="list-group-horizontal-md">
+    @foreach (var item in Model)
+    {
+    <dt><a>@item.Name</a><br /></dt>
+    <dd>
+        <img src="@Url.Content(@item.DevImageName)" /><br />
+        <a>GitHub: </a>
+        <a href="@item.GitHubLink" target="_blank">@item.GitHubName</a>
+    </dd>
+    }
+</dl>
+

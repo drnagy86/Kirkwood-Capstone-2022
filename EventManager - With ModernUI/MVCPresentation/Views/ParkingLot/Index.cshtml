@@ -1,0 +1,57 @@
+﻿@model MVCPresentation.Models.ParkingLotModel
+@{
+    ViewBag.Title = "Tadpole: Parking Lot Index";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+<div class="d-flex flex-row justify-content-center">
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+    <h2 class="mt-4">@Html.DisplayFor(model => model.LocationName)</h2>
+</div>
+
+<hr />
+@if (ViewBag.Error != null)
+{
+    <p class="alert alert-danger">ViewBag.Error</p>
+}
+<div class="row">
+    <div class="col-md-3">
+        @Html.Action("LocationNav", "Location", new { locationId = Model.LocationID })
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="row justify-content-center justify-content-md-start">
+            @foreach (var item in Model.ParkingLots)
+            {
+                <div class="card col-md-5 offset-md-1 mb-4">
+                    <img src="~/Content/Images/LocationImages/@item.ImageName" class="card-img-top" alt="@item.ImageName">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        @if (Model.CanEdit)
+                        {
+                            <div>
+                                @Html.ActionLink("Edit", "Edit", new { lotId = item.LotID }, new { @class = "btn btn-secondary" })
+                                @using (Html.BeginForm("Delete", "ParkingLot"))
+                                {
+                                    @Html.Hidden("locationId", item.LocationID)
+                                    @Html.Hidden("lotId", item.LotID)
+                                    <input class="btn btn-secondary" type="submit" value="Delete" onclick="return confirm('Are you sure want to delete this area?')" />
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model.CanEdit)
+        {
+            @Html.ActionLink("Create", "Create", "ParkingLot", new { Model.LocationID }, new { @class = "btn btn-primary offset-md-1" })
+        }
+    </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="d-flex flex-column min-vh-100">
+    @*Nav var inspired by https://bootswatch.com/*@
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a href="" class="navbar-brand">Tadpole Events</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Events
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("List of Events", "EventList", "Event", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                            @Html.ActionLink("Create an Event", "EventCreate", "EventCreate", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        </ul>
+
+                        @*@Html.ActionLink("Events", "EventList", "Event", routeValues: null, htmlAttributes: new { @class = "nav-link" })*@
+                    </li>
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Suppliers", "ViewSuppliers", "Supplier", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Locations", "ViewLocations", "Location", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-Bar 2</a>*@
+                        @Html.ActionLink("Volunteers", "ViewVolunteers", "Volunteer", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="">Nav-bar 3</a>*@
+                        @Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                    </li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Administration", "Index", "Admin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    }
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    @Html.Partial("_LoginPartial")
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <main flex-shrink-0>
+        <div class="container-fluid">
+            <div class="mt-5">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-dark">Created by the Dev Team for the Software Development Capstone at Kirkwood Community College, 2022</span>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

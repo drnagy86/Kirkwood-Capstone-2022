@@ -1,0 +1,83 @@
+﻿<Page x:Class="WPFPresentation.Event.pgTaskListEdit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Event"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgTaskListEdit" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="txtBlkEditTaskList" Grid.Column="0" Grid.Row="0" Margin="10"
+                               HorizontalAlignment="Center" VerticalAlignment="Top"
+                               Style="{StaticResource TitleTextBlockStyle}">Update Task</TextBlock>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="txtBlkEventName" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Event Name</TextBlock>
+
+            <TextBlock x:Name="txtBlkTaskName" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Task Name:</TextBlock>
+            <TextBox x:Name="txtTaskName" Grid.Row="1" Grid.Column="1" Margin="10px" Padding="5" VerticalContentAlignment="Center"/>
+
+            <TextBlock x:Name="txtBlkTaskDescription" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Description:</TextBlock>
+            <TextBox x:Name="txtTaskDescription" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" TextWrapping="Wrap"
+                                 Margin="10px" Padding="5" VerticalScrollBarVisibility="Auto"/>
+
+            <TextBlock x:Name="txtBlkTaskAssign" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Assign:</TextBlock>
+            <ComboBox x:Name="cboAssign" Grid.Row="4" Grid.Column="1" Margin="10px" Width="200" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <TextBlock x:Name="txtBlkTaskDueDate" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Due Date:</TextBlock>
+            <DatePicker x:Name="dtpTaskDueDate" Grid.Row="5" Grid.Column="1" Margin="10px" Width="200" />
+
+            <TextBlock x:Name="txtBlkPriority" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Task Priority:</TextBlock>
+            <ComboBox x:Name="cboPriority" Grid.Row="6" Grid.Column="1" Margin="10px" Width="200" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBlock x:Name="txtBlkVolunteerNeed" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center"
+                                    HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Volunteers:</TextBlock>
+            <DockPanel x:Name="dcPnlNumVolunteers" Grid.Row="7" Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center">
+                <TextBox Text="{Binding ElementName=sldrNumVolunteers, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="10"></TextBox>
+                <Slider x:Name="sldrNumVolunteers" Maximum="10" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Value="0"></Slider>
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSaveTask" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="25 10 15 10" Padding="20 5" Click="btnSaveTask_Click">Save</Button>
+            <Button x:Name="btnCancelTask" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="20 10" Padding="15 5" Click="btnCancelTask_Click">Cancel</Button>
+            <Button x:Name="btnDeleteTask" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="20 10" Padding="15 5" Click="btnDeleteTask_Click">Delete</Button>
+        </Grid>
+    </Grid>
+</Page>

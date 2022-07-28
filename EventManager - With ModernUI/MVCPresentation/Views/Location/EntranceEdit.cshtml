@@ -1,0 +1,46 @@
+﻿@model MVCPresentation.Models.EditEntranceModel
+
+@{
+    ViewBag.Title = "Tadpole - Entrances";
+    
+}
+
+<div>
+    <h4>@ViewBag.Name</h4>
+    <hr />
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+    @using (Html.BeginForm("EntranceEdit", "Location", FormMethod.Post))
+    {
+        <dl class="dl-horizontal">
+            @Html.HiddenFor(model => model.OldEntranceName)
+            @Html.HiddenFor(model => model.OldDescription)
+            @Html.HiddenFor(model => model.LocationID)
+            @Html.HiddenFor(model => model.EntranceID)
+            <dt>
+                @Html.DisplayNameFor(model => model.EntranceName)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.EntranceName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EntranceName, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.TextAreaFor(model => model.Description, new
+                {
+                    @class = "form-control",
+                    rows = 5
+                })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "EntranceIndex", new { locationId = Model.LocationID }, new { @class = "btn btn-secondary" })
+    }
+
+</div>

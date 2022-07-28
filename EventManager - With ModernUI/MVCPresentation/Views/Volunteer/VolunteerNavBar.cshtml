@@ -1,0 +1,8 @@
+﻿@model Int32
+
+<div class="d-none d-md-flex flex-column">
+    @Html.ActionLink("Details", null, null, new { volunteerID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+</div>
+<div class="d-flex d-md-none flex-row justify-content-center">
+    @Html.ActionLink("Details", null, null, new { volunteerID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+</div>

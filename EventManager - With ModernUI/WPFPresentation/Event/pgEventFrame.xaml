@@ -1,0 +1,40 @@
+﻿<Page x:Class="WPFPresentation.Event.pgEventFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Event"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgEventFrame" Loaded="Page_Loaded" x:Name="frmEventFrame">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button x:Name="btnEventDetails" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnEventDetails_Click">Event Details</Button>
+            <Button x:Name="btnTasks" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnTasks_Click">Tasks</Button>
+            <Button x:Name="btnItinerary" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnItinerary_Click">Itinerary</Button>
+            <!-- <Button x:Name="btnBudget" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">Budget</Button>
+            <Button x:Name="btnAdvertising" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">Advertising</Button>
+            <Button x:Name="btnAfterEventReport" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">After Event Report</Button>
+            <Button x:Name="btnFiles" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">Files</Button>
+            <Button x:Name="btnInvitations" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">Invitations</Button>-->
+        </Grid>
+        <Frame x:Name="EventFrame" Grid.Column="1" Margin="5px" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</Page>

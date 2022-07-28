@@ -1,0 +1,104 @@
+﻿@model MVCPresentation.Models.SupplierServicesViewModel
+
+@{
+    ViewBag.Title = "Supplier Services";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+<style>
+    img {
+        height: 200px;
+        max-width: 300px;
+    }
+
+    @@media only screen and (max-width: 600px) {
+        img {
+            height: 150px;
+            width: 200px;
+        }
+
+        tr {
+            border-bottom: solid;
+        }
+        
+    }
+</style>
+
+<div class="row">
+
+    <div class="d-flex flex-row justify-content-center">
+        <h2 class="mt-4 text-center">Services</h2>
+
+    </div>
+
+    <hr />
+
+    <div class="col-md-3">
+        @Html.Partial("SupplierNav", Model.Supplier.SupplierID)
+    </div>
+    <div class="col-md-8 col-sm-12">
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.CanEdit)
+            {
+                <div class="d-flex justify-content-end">
+                    @Html.ActionLink("Add Service", "CreateSupplierService", new { supplierID = Model.Supplier.SupplierID }, new { @class = "btn btn-primary" })
+                </div>
+            }
+        }
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Description</th>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (Model.CanEdit)
+                        {
+                            <th></th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataObjects.ServiceVM service in Model.Services)
+                {
+
+                    <tr>
+                        @if (service.ServiceImagePath == null)
+                        {
+                            <td><img height="200" width="300"></td>
+                        }
+                        else
+                        {
+                            <td><img src="~/Content/Images/SupplierImages/@service.ServiceImagePath"></td>
+                        }
+                        <td>@service.ServiceName</td>
+                        <td>$@service.Price</td>
+                        <td>@service.Description</td>
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (Model.CanEdit)
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "EditSupplierService", new { supplierID = Model.Supplier.SupplierID, serviceID = service.ServiceID }, new { @class = "btn btn-primary" })
+                                    @using (Html.BeginForm("DeleteService", "Supplier"))
+                                    {
+                                        @Html.Hidden("serviceID", service.ServiceID)
+                                        @Html.Hidden("supplierID", Model.Supplier.SupplierID)
+                                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    }
+                                </td>
+
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

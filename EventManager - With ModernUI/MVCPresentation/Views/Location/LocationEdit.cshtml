@@ -1,0 +1,108 @@
+﻿@model DataObjects.Location
+@{
+    ViewBag.Title = "Edit " + Model.Name;
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+<div class="panel col w-100 pt-4">
+    <div class="d-flex flex-row">
+        <div class="col-7 text-end">
+            <h2>Edit @Model.Name</h2>
+            @Html.ValidationMessage("", new { @class = "text-danger" })
+        </div>
+        <div class="col-3 text-end pt-2">
+            @Html.ActionLink("Delete", "DeleteLocation", "Location", new { locationID = Model.LocationID }, new { onclick = "return confirm('Are sure want to delete this location?');", @class = "btn btn-outline-dark" })
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("LocationNav", Model.LocationID)
+        </div>
+
+        <div class="col-md">
+            @using (Html.BeginForm())
+            {
+
+                @Html.HiddenFor(model => model.LocationID)
+            <div class="panel-body">
+                <div class="form-group w-75">
+                    <label class="pt-2">About</label>
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control", rows = 5 })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="d-flex flex-row w-75 pt-4">
+                    <div class="col">
+                        <div class="d-flex flex-row text-center">
+                            <label class="col-md-2 pt-1 text-start">Phone Number:</label>
+                            @Html.TextAreaFor(model => model.Phone, htmlAttributes: new { @class = "form-control ", rows = 1 })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+
+                <div class="d-flex flex-row w-75 pt-4">
+                    <div class="col">
+                        <div class="d-flex flex-row text-center">
+                            <label class="col-md-2 pt-1 text-start">Email Address:</label>
+                            @Html.TextAreaFor(model => model.Email, htmlAttributes: new { @class = "form-control", rows = 1 })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                    <div class="d-flex flex-row pt-4">
+                        <label class="pt-1">Address 1: &emsp;</label>
+                        <div class="w-50">
+                            @Html.TextAreaFor(model => model.Address1, htmlAttributes: new { @class = "form-control", rows = 1 })
+                            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="d-flex flex-row pt-4">
+                        <label class="pt-1">Address 2:&emsp;</label>
+                        <div class="w-50">
+                            @Html.TextAreaFor(model => model.Address2, htmlAttributes: new { @class = "form-control", rows = 1 })
+                            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex flex-column">
+
+                        <div class="d-flex flex-row pt-4">
+                            <h2>Pricing</h2>
+                        </div>
+
+                        <div class="d-flex flex-row w-75">
+
+                            @Html.TextAreaFor(model => model.PricingInfo, htmlAttributes: new { @class = "form-control", rows = 5 })
+                            @Html.ValidationMessageFor(model => model.PricingInfo, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="d-flex flex-row pt-4">
+                            <button class="btn btn-outline-dark">Save</button>&emsp;
+                            @Html.ActionLink("Cancel", "ViewLocationDetails", new { locationId = Model.LocationID }, new { onclick = "return confirm('This will discard any changes you have made. Continue?');", @class = "btn btn-outline-dark" })
+                        </div>
+                    </div>
+                </div>
+
+                }
+            </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

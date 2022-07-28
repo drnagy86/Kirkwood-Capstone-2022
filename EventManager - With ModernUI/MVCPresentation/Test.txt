@@ -1,0 +1,3 @@
+To: supplierking@suppliers.com
+Subject: Supplier Application
+Your supplier request has been denied. You can find the application in your user profile. Please review the information entered for accuracy and fix any mistakes.

@@ -1,0 +1,30 @@
+﻿<Page x:Class="WPFPresentation.pgVolunteerFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgVolunteerFrame" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button x:Name="btnVolunteerDetails" Grid.Row="0" Content="Details" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnVolunteerDetails_Click"/>
+            <Button x:Name="btnVolunteerSchedule" Grid.Row="1" Content="Schedule" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnVolunteerSchedule_Click"/>
+            <Button x:Name="btnVolunteerSupplies" Grid.Row="2" Content="Supplies" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+
+        </Grid>
+        <Frame x:Name="VolunteerFrame" Grid.Column="1" Margin="5px" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</Page>

@@ -1,0 +1,14 @@
+﻿@model Int32
+<div class="d-none d-md-flex flex-column">
+    @Html.ActionLink("Details", "ViewSupplierDetails", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    @Html.ActionLink("Schedule", "ViewSupplierSchedule", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    @Html.ActionLink("Pricing", "ViewSupplierServices", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+</div>
+
+<div class="d-flex d-md-none flex-row justify-content-center">
+    @Html.ActionLink("Details", "ViewSupplierDetails", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+    @Html.ActionLink("Schedule", "ViewSupplierSchedule", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+    @Html.ActionLink("Pricing", "ViewSupplierServices", "Supplier", new { supplierID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+</div>
+
+

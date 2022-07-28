@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@model Int32
+
+<div class="d-none d-md-flex flex-column">
+    @Html.ActionLink("Details", "Details", "Event", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    @if (User != null && (User.IsInRole("Open Volunteer") || User.IsInRole("Specific Volunteer")))
+    {
+        string currentUserName = User.Identity.GetUserName();
+        @Html.ActionLink("Assigned Work", "TasksAssigned", "TaskList",
+       new { eventID = Model, username = currentUserName }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    }
+    @Html.ActionLink("Tasks", "EventTaskList", "TaskList", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    @Html.ActionLink("Itinerary", "Itinerary", "Event", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-lg" })
+</div>
+<div class="d-flex d-md-none flex-row justify-content-center">
+    @Html.ActionLink("Details", "Details", "Event", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+    @if (User != null && (User.IsInRole("Open Volunteer") || User.IsInRole("Specific Volunteer")))
+    {
+        string currentUserName = User.Identity.GetUserName();
+        @Html.ActionLink("Assigned Work", "TasksAssigned", "TaskList",
+       new { eventID = Model, username = currentUserName }, new { @class = "btn btn-block btn-secondary btn-lg" })
+    }
+    @Html.ActionLink("Tasks", "EventTaskList", "TaskList", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+    @Html.ActionLink("Itinerary", "Itinerary", "Event", new { eventID = Model }, new { @class = "btn btn-block btn-secondary btn-sm" })
+</div>

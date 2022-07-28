@@ -1,0 +1,95 @@
+﻿<Page x:Class="WPFPresentation.Event.pgTaskListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Event"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="800"
+      Title="pgTaskListView">
+
+    <Grid Loaded="Grid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="150" />
+            <RowDefinition MaxHeight="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="lblEventName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}">Event Name</TextBlock>
+        
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <!-- Task List View -->
+            <DataGrid x:Name="datViewAllTasksForEvent" SelectionMode="Single" IsReadOnly="True" 
+                      GridLinesVisibility="Horizontal"
+                       MouseLeftButtonUp="datViewAllTasksForEvent_MouseLeftButtonUp" AutoGenerateColumns="False" IsEnabled="true">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TaskPriority}" Value="High">
+                                <Setter Property="Foreground" Value="Red"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TaskPriority}" Value="Medium">
+                                <Setter Property="Foreground" Value="Orange"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TaskPriority}" Value="Low">
+                                <Setter Property="Foreground" Value="Blue"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Task Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Due By" Binding="{Binding FormatedDueDate}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Style.Triggers >
+                                    <Trigger Property="Text" Value="No due date selected">
+                                        <Setter Property="Background" Value="#FFCCCB"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="auto" Header="TaskPriority" Binding="{Binding TaskPriority}" />
+                </DataGrid.Columns>
+                
+                
+            </DataGrid>
+            <Label x:Name="lblEmptyTaskList" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" >Event has no tasks</Label>
+
+        </Grid>
+        
+        <Separator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <TextBlock x:Name="lblTaskListCreate" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                        Margin="30 0 0 65" Style="{StaticResource BodyTextBlockStyle}">Add Task:</TextBlock>
+        <Button x:Name="btnTaskListCreate" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Margin="100 0 0 60"  Click="btnTaskListCreate_Click" Background="Black" Foreground="White">+</Button>
+        
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition MinHeight="20" MaxHeight="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblVolunteers" FontSize="20"  HorizontalAlignment="Center">Click on a task to view a list of its volunteers</Label>
+            <DataGrid x:Name="datTaskVolunteers" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date Assigned" Binding="{Binding DateAssigned, StringFormat=\{0:MM/dd/yy\}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Role" Binding="{Binding RoleID}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

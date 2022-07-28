@@ -1,0 +1,121 @@
+﻿<Window x:Class="WPFPresentation.RegisterUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFPresentation"
+        mc:Ignorable="d"
+        Title="RegisterUser" Height="475" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="40*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="txtInstructions" Grid.Row="0" Grid.ColumnSpan="3" TextWrapping="Wrap" TextAlignment="Center" Margin="50 5"
+                   FontWeight="Bold" FontFamily="Yu Gothic UI" FontSize="20">
+            User Registration
+        </TextBlock>
+
+
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Email Address:"/>
+        <TextBox x:Name="txtEmail" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Password:" />
+        <PasswordBox x:Name="pwdPassword" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Retype Password:"/>
+        <PasswordBox x:Name="pwdConfirmPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Given Name:"/>
+        <TextBox x:Name="txtGivenName" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Family Name:"/>
+        <TextBox x:Name="txtFamilyName" Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="City:"/>
+        <TextBox x:Name="txtCity" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="State:"/>
+        <ComboBox x:Name="cboState" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,0,0" Width="245" >
+            <ComboBoxItem Content="Alabama" Tag="AL"/>
+            <ComboBoxItem Content="Alaska" Tag="AK" />
+            <ComboBoxItem Content="Arizona" Tag="AZ"/>
+            <ComboBoxItem Content="Arkansas" Tag="AR"/>
+            <ComboBoxItem Content="California" Tag="CA"/>
+            <ComboBoxItem Content="Colorado" Tag="CO"/>
+            <ComboBoxItem Content="Connecticut" Tag="CT"/>
+            <ComboBoxItem Content="Delaware" Tag="DE"/>
+            <ComboBoxItem Content="District of Columbia" Tag="DC"/>
+            <ComboBoxItem Content="Florida" Tag="FL"/>
+            <ComboBoxItem Content="Georgia" Tag="GA"/>
+            <ComboBoxItem Content="Hawaii" Tag="HI"/>
+            <ComboBoxItem Content="Idaho" Tag="ID"/>
+            <ComboBoxItem Content="Illinois" Tag="IL"/>
+            <ComboBoxItem Content="Indiana" Tag="IN"/>
+            <ComboBoxItem Content="Iowa" Tag="IA"/>
+            <ComboBoxItem Content="Kansas" Tag="KS"/>
+            <ComboBoxItem Content="Kentucky" Tag="KY"/>
+            <ComboBoxItem Content="Louisiana" Tag="LA"/>
+            <ComboBoxItem Content="Maine" Tag="ME"/>
+            <ComboBoxItem Content="Maryland" Tag="MD"/>
+            <ComboBoxItem Content="Massachusetts" Tag="MA"/>
+            <ComboBoxItem Content="Michigan" Tag="MI"/>
+            <ComboBoxItem Content="Minnesota" Tag="MN"/>
+            <ComboBoxItem Content="Mississippi" Tag="MS"/>
+            <ComboBoxItem Content="Missouri" Tag="MO"/>
+            <ComboBoxItem Content="Montana" Tag="MT"/>
+            <ComboBoxItem Content="Nebraska" Tag="NE"/>
+            <ComboBoxItem Content="Nevada" Tag="NV"/>
+            <ComboBoxItem Content="New Hampshire" Tag="NH"/>
+            <ComboBoxItem Content="New Jersey" Tag="NJ"/>
+            <ComboBoxItem Content="New Mexico" Tag="NM"/>
+            <ComboBoxItem Content="New York" Tag="NY"/>
+            <ComboBoxItem Content="North Carolina" Tag="NC"/>
+            <ComboBoxItem Content="North Dakota" Tag="ND"/>
+            <ComboBoxItem Content="Ohio" Tag="OH"/>
+            <ComboBoxItem Content="Oklahoma" Tag="OK"/>
+            <ComboBoxItem Content="Oregan" Tag="OR"/>
+            <ComboBoxItem Content="Pennsylvania" Tag="PA"/>
+            <ComboBoxItem Content="Rhode Island" Tag="RI"/>
+            <ComboBoxItem Content="South Carolina" Tag="SC"/>
+            <ComboBoxItem Content="South Dakota" Tag="SD"/>
+            <ComboBoxItem Content="Tennessee" Tag="TN"/>
+            <ComboBoxItem Content="Texas" Tag="TX"/>
+            <ComboBoxItem Content="Utah" Tag="UT"/>
+            <ComboBoxItem Content="Vermont" Tag="VT"/>
+            <ComboBoxItem Content="Virginia" Tag="VA"/>
+            <ComboBoxItem Content="Washington" Tag="WA"/>
+            <ComboBoxItem Content="West Virginia" Tag="WV"/>
+            <ComboBoxItem Content="Wisconsin" Tag="WI"/>
+            <ComboBoxItem Content="Wyoming" Tag="WY"/>
+        </ComboBox>
+
+        <Label Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,10" FontFamily="Yu Gothic UI" Content="Zip Code:"/>
+        <TextBox x:Name="txtZipCode" Grid.Row="8" Grid.Column="1" VerticalContentAlignment="Center" Margin="10,5,30,5" Grid.ColumnSpan="2" />
+
+        <Grid Grid.Row="9" Grid.Column ="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnCancel" Grid.Column="1" Content="Cancel Account" Margin="0 5 30 10" Click="btnCancel_Click"/>
+
+            <Button x:Name="btnSubmit" Grid.Column="0" Content="Create Account" Margin="10 5 20 10" Click="btnSubmit_Click" IsDefault="True"/>
+        </Grid>
+
+    </Grid>
+</Window>

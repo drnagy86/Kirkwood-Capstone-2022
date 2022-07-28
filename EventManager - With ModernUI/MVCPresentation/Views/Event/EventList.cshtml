@@ -1,0 +1,231 @@
+﻿@model IEnumerable<DataObjects.EventVM>
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@{
+    ViewBag.Title = "Events";
+
+
+}
+
+@{
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var loggedInUser = userManager.FindById(User.Identity.GetUserId());
+}
+<div class="container mt-3">
+    <div class="d-flex">
+        @*<nav class="col-sm-4 me-auto" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Events</li>
+            </ol>
+        </nav>*@
+
+        <div class="dropdown me-3 ms-auto">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="FilterDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+                Filters
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="FilterDropDown">
+                <li>@Html.ActionLink("Future Events", "EventList", "Event", new { @class = "dropdown-item" })</li>
+                <li>@Html.ActionLink("Past Events", "AllPastEvents", "Event", new { @class = "dropdown-item" })</li>
+                <li>@Html.ActionLink("Past and Future Events", "AllEvents", "Event", new { @class = "dropdown-item" })</li>
+                <li>@Html.ActionLink("My Future Events", "UserFutureEvents", "Event", new { @class = "dropdown-item" })</li>
+                <li>@Html.ActionLink("My Past Events", "UserPastEvents", "Event", new { @class = "dropdown-item" })</li>
+                <li>@Html.ActionLink("My Past and Future Events", "UserAllEvents", "Event", new { @class = "dropdown-item" })</li>
+            </ul>
+        </div>
+        @Html.Hidden("user", loggedInUser)
+
+        @using (Html.BeginForm("EventList", "Event", FormMethod.Post, new { @class = "col-md-2 mb-3 d-flex" }))
+        {
+
+            @Html.TextBox("search", null, new { @class = "form-control", placeholder = "Search" })
+            <button class="btn btn-secondary" type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        }
+
+        @*<form class=" col-md-2 m-3">
+                <input class=" form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>*@
+
+    </div>
+</div>
+
+<div class="row">
+    <h2 class="m-2">Events</h2>
+</div>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="row table-responsive-md mt-3 ">
+        <table class="table table-bordered table-responsive" id="eventListTable">
+            <thead>
+                <tr class="">
+                    <th>
+                        <div class="d-flex">
+                            <p class="text-start text-nowrap me-2">Name</p>
+                            <button onclick="sortEventTable(0)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <p class="text-start text-nowrap me-2">Description</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <p class="text-start text-nowrap me-2">Date(s)</p>
+                            <button onclick="sortEventTable(2)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <p class="text-start text-nowrap me-2">Location</p>
+                            <button onclick="sortEventTable(3)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                        </div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", "Event", new { eventId = item.EventID })">@item.EventName<i class="bi bi-box-arrow-up-right"></i> </a>
+                            @*<a href="#">@item.EventName<i class="bi bi-box-arrow-up-right"></i> </a>*@
+                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EventDescription)
+                            </td>
+
+                            <td>
+                                <ul>
+                                    @foreach (var date in item.EventDates)
+                                    {
+
+                                        <li> @Html.DisplayFor(modelItem => date.EventDateID)</li>
+                                    }
+                                </ul>
+
+
+                            </td>
+                            <td>
+                                @if (item.LocationID != null)
+                                {
+                                    <p>@Html.DisplayFor(modelItem => item.Location.Name)</p>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!--<div class="row table-responsive-md mt-3">
+            <table class="table table-bordered" id="eventListTable">
+
+                <thead>
+
+                    <tr class="bg-light">
+                        <th>
+                            <div class="d-flex">
+                                <p class="text-start text-nowrap me-2">Name</p>
+                                <button onclick="sortEventTable(0)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex">
+                                <p class="text-start text-nowrap me-2">Organizer</p>
+                                <button onclick="sortEventTable(1)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex">
+                                <p class="text-start text-nowrap me-2">Description</p>
+                            </div>-->
+                            @*<div class="float-end">
+                                    <i class="bi bi-arrow-up"></i><i class="bi bi-arrow-down"></i>
+                                </div>*@
+                            <!--</th>
+                    <th>
+                        <div class="d-flex ">
+                            <p class="text-start text-nowrap me-2">Event Dates</p>
+                            <button onclick="sortEventTable(3)" class="btn btn-sm btn-outline-dark ms-auto">
+                                <i class="bi bi-arrow-down-up"></i>
+                            </button>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex">
+                            <p class="text-start text-nowrap me-2">Location</p>
+
+                            <button onclick="sortEventTable(4)" class="btn btn-sm btn-outline-dark ms-auto"><i class="bi bi-arrow-down-up"></i></button>
+                        </div>
+
+
+                    </th>
+                    <th>Details</th>
+                    <th>Volunteer</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventName)
+                        </td>
+                        <td>
+                            @foreach (var user in item.EventManagers)
+                            {
+                                <p class="">@user.GivenName @user.FamilyName</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventDescription)
+                        </td>
+                        <td>
+                            @foreach (var date in item.EventDates)
+                            {
+                                <span class="">@Html.DisplayFor(modelItem => date.EventDateID)</span><br />
+                            }
+                        </td>
+                        <td>
+                            @if (item.LocationID != null)
+                            {
+                                <p>@item.Location.Name, @item.Location.City, @item.Location.State</p>
+                            }
+
+
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Details", "Details", "Event", new { eventId = item.EventID, @class = "btn btn-sm btn-outline-info m-1" })
+
+                        </td>
+                        <td>
+                            @Html.ActionLink("Apply", "Apply", null, new { id = item.EventID, @class = "btn btn-sm btn-outline-primary m-1" })
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+
+        </table>
+    </div>-->
+                            }
+                            else
+                            {
+                            <p class="m-2 me-auto text-info">No events found for this search.</p>
+                            }
+

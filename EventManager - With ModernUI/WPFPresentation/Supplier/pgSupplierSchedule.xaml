@@ -1,0 +1,56 @@
+﻿<Page x:Class="WPFPresentation.Supplier.pgSupplierSchedule"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Supplier"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgSupplierSchedule" Loaded="Page_Loaded">
+
+    <Grid x:Name="grdSupplierSchedule">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock  x:Name="txtSupplierSchedule" Text="[Supplier]'s Schedule" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource TitleTextBlockStyle}"/>
+        <Calendar   x:Name="calSupplierCalendar" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxWidth="1000" SelectedDatesChanged="calSupplierCalendar_SelectedDatesChanged" DisplayDateChanged="calSupplierCalendar_DisplayDateChanged"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="450"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="lblSupplierDate" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource TitleTextBlockStyle}">
+                        Booked Events
+            </TextBlock>
+            <DataGrid x:Name="datSupplierActivities" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding}" IsReadOnly="True" 
+                              AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                              IsSynchronizedWithCurrentItem="True" HorizontalContentAlignment="Center" SelectionMode="Single" Padding="0" OverridesDefaultStyle="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Activity" Binding="{Binding ActivityName}" Width="*"/>
+                    <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime, StringFormat='hh:mm tt'}"/>
+                    <DataGridTextColumn Header="End Time" Binding="{Binding EndTime, StringFormat='hh:mm tt'}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource TitleTextBlockStyle}">
+                        Hours of Operation
+            </TextBlock>
+            <DataGrid x:Name="datSupplierAvailabilities" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding}" IsReadOnly="True" Width="210"
+                              AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single"
+                              IsSynchronizedWithCurrentItem="True" HorizontalContentAlignment="Center" Padding="0" OverridesDefaultStyle="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Start Time" Binding="{Binding TimeStart, StringFormat='hh:mm tt'}"/>
+                    <DataGridTextColumn Header="End Time" Binding="{Binding TimeEnd, StringFormat='hh:mm tt'}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

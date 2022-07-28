@@ -1,0 +1,59 @@
+﻿@model DataObjects.Reviews
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@{
+    ViewBag.Title = "Tadpole - Review Location";
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var loggedInUser = userManager.FindById(User.Identity.GetUserId());
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("LocationNav", Model.ForeignID)
+    </div>
+    <div class="col">
+        @using (Html.BeginForm())
+        {
+            <h2>Add a Review</h2>
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.ForeignID, new { @value = Model.ForeignID })
+            @Html.HiddenFor(model => model.ReviewType, new { @value = "Location Review" })
+            @Html.HiddenFor(model => model.UserID, new { @value = loggedInUser })
+
+            <div>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group mt-4">
+                    @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        <span class="col-md-5">@Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @type = "number", @min = "1", @max = "5", @value = "1", @class = "form-control" } })</span>
+                        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    @Html.LabelFor(model => model.Review, htmlAttributes: new { @class = "control-label" })
+                    <div class="col-md-10">
+                        <span class="col-md-8">@Html.TextAreaFor(model => model.Review, new { @class = "form-control", rows = 5 })</span>
+                        @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 mt-5">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <a href="/Location/ViewLocationDetails?locationID=@Model.ForeignID" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "ViewLocationDetails", new { locationID = Model.ForeignID })
+        </div>
+    </div>
+</div>

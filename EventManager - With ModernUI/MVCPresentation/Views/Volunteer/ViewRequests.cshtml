@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DataObjects.VolunteerRequestViewModel>
+
+@{
+    ViewBag.Title = "Tadpole - Volunteer Requests";
+}
+
+<h2 class="mt-5">My Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                Accept
+            </th>
+            <th>
+                Deny
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskName)
+                </td>
+                <td>
+                    @if (item.VolunteerResponse == null)
+                    {
+                        @Html.ActionLink("Approve", "Approve", new { id = item.RequestID, approve = true, volunteerID = item.VolunteerID }, new { @class = "btn btn-primary" })
+                        //<a href="/Volunteer/Approve/@item.RequestID" class="btn btn-primary">Approve</a>
+                    }
+                    else if (item.VolunteerResponse == false)
+                    {
+                        @Html.ActionLink("Approve", "Approve", new { id = item.RequestID, approve = true, volunteerID = item.VolunteerID }, new { @class = "btn btn-secondary" })
+                        //<a href="/Volunteer/Approve/@item.RequestID" class="btn btn-primary">Approve</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Approved", "Approve", new { id = item.RequestID, approve = true, volunteerID = item.VolunteerID }, new { @class = "btn btn-success" })
+                        //<a href="/Volunteer/Approve/@item.RequestID" class="btn btn-outline-primary">Approve</a>
+                    }
+                </td>
+                <td>
+                    @if (item.VolunteerResponse == null)
+                    {
+                        @Html.ActionLink("Deny", "Approve", new { id = item.RequestID, approve = false, volunteerID = item.VolunteerID }, new { @class = "btn btn-danger" })
+                        //<a href="/Volunteer/Deny/@item.RequestID" class="btn btn-danger">Deny</a>
+                    }
+                    else if (item.VolunteerResponse == true)
+                    {
+                        @Html.ActionLink("Deny", "Approve", new { id = item.RequestID, approve = false, volunteerID = item.VolunteerID }, new { @class = "btn btn-secondary" })
+                        //<a href="/Volunteer/Deny/@item.RequestID" class="btn btn-danger">Deny</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Denied", "Approve", new { id = item.RequestID, approve = false, volunteerID = item.VolunteerID }, new { @class = "btn btn-danger" })
+                        //<a href="/Volunteer/Deny/@item.RequestID" class="btn btn-outline-danger">Deny</a>
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@if (Model.Count() == 0)
+{
+    <p class="text-center">No requests found, try again later.</p>
+}

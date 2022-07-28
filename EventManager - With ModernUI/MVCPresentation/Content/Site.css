@@ -1,0 +1,46 @@
+﻿@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
+/* https://medium.com/allenhwkim/mobile-friendly-table-b0cb066dbc0e */
+@media screen and (max-width: 600px) {
+    table thead {
+        display: none;
+    }
+
+    table td {
+        display: flex;
+    }
+
+    table td::before {
+        content: attr(label);
+        font-weight: bold;
+        width: 120px;
+        min-width: 120px;
+    }
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.indent {
+    padding-left: 150px;
+}
+
+main > .container {
+    padding: 60px 15px 0;
+}
+
+.height-30px {
+    height: 30px;
+}
+
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}

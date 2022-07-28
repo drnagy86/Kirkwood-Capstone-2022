@@ -1,0 +1,35 @@
+﻿<Page x:Class="WPFPresentation.Location.pgLocationFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Location"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgLocationFrame" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="btnSiteDetails" Grid.Row="0" Content="Site Details" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnSiteDetails_Click"/>
+            <Button x:Name="btnSiteAreas" Grid.Row="1" Content="Site Areas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnSiteAreas_Click"/>
+            <Button x:Name="btnSiteSchedule" Grid.Row="2" Content="Site Schedule" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnSiteSchedule_Click"/>
+            <Button x:Name="btnSiteParking" Grid.Row="3" Content="Site Parking" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnSiteParking_Click" />
+            <Button x:Name="btnSiteEntrances" Grid.Row="4" Content="Site Entrances" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="btnSiteEntrances_Click"/>
+        </Grid>
+        <Frame x:Name="LocationFrame" Grid.Column="1" Margin="5px" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</Page>

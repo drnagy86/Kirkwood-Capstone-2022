@@ -1,0 +1,80 @@
+﻿<Page x:Class="WPFPresentation.Event.pgCreateActivity"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Event" xmlns:uc="clr-namespace:WPFPresentation.CustomControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgCreateActivity" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblActivityEventName" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Add Activity</Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Event:</Label>
+            <TextBox x:Name="txtEvent" Grid.Column="1" Grid.Row="0" Height="20" Margin="10 0 100 0" IsReadOnly="True" 
+                     VerticalAlignment="Center"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Location:</Label>
+            <TextBox x:Name="txtLocation" Grid.Column="1" Grid.Row="1" Height="20" Margin="10 0 100 0" IsReadOnly="True" 
+                     VerticalAlignment="Center"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Name:</Label>
+            <TextBox x:Name="txtName" Grid.Column="1" Grid.Row="2" Height="20" Margin="10 0 100 0" MaxLength="50" 
+                     VerticalAlignment="Center"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Description:</Label>
+            <TextBox x:Name="txtDescription" Grid.Column="1" Grid.Row="3" Height="60" Margin="10 0 100 0" MaxLength="150" 
+                     VerticalAlignment="Center"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Date:</Label>
+            <ComboBox x:Name="cboDate" Grid.Column="1" Grid.Row="4" Margin="10 0 0 0" VerticalAlignment="Center"></ComboBox>
+
+            <Label Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Start Time:</Label>
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
+                <uc:TimeComboBoxes x:Name="ucStartTime"/>
+            </StackPanel>
+
+            <Label Grid.Column="0" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">End Time:</Label>
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
+                <uc:TimeComboBoxes x:Name="ucEndTime"/>
+            </StackPanel>
+
+            <Label Grid.Column="0" Grid.Row="7" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Location Area:</Label>
+            <ComboBox x:Name="cboSublocation" Grid.Column="1" Grid.Row="7" Margin="10 0 0 0" VerticalAlignment="Center"></ComboBox>
+
+            <Label Grid.Column="0" Grid.Row="8" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Public Activity:</Label>
+            <RadioButton x:Name="rdoPublic" GroupName="public" Content="Public" Grid.Row="8" Grid.Column="1" Margin="10 0 0 0"/>
+            <RadioButton x:Name="rdoPrivate" GroupName="public" Content="Private" Grid.Row="8" Grid.Column="1" Margin="90 0 0 0"/>
+
+            <Label Grid.Column="0" Grid.Row="9" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Upload Image:</Label>
+            <Button x:Name="btnImageUpload" Grid.Column="1" Grid.Row="9" Click="btnImageUpload_Click" Margin="10 0 0 0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">Choose file...</Button>
+        </Grid>
+
+        <Button x:Name="btnSave" Grid.Row="2" Margin="110 10 10 10" Click="btnSave_Click">Save</Button>
+        <Button x:Name="btnCancel" Grid.Row="2" Margin="180 10 10 10" Click="btnCancel_Click">Cancel</Button>
+    </Grid>
+</Page>

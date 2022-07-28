@@ -1,0 +1,47 @@
+﻿@model MVCPresentation.Models.EditSublocationModel
+
+@{
+    ViewBag.Title = "Edit Sublocation";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Edit Area</h4>
+    <hr />
+    @Html.ValidationMessage("", new { @class = "text-danger" } )
+    @using (Html.BeginForm("Edit", "Sublocation", FormMethod.Post))
+    {
+        <dl class="dl-horizontal">
+            @Html.HiddenFor(model => model.SublocationName)
+            @Html.HiddenFor(model => model.SublocationDescription)
+            @Html.HiddenFor(model => model.LocationID)
+            @Html.HiddenFor(model => model.SublocationID)
+            <dt>
+                @Html.DisplayNameFor(model => model.NewSublocationName)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.NewSublocationName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NewSublocationName, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NewSublocationDescription)
+            </dt>
+
+            <dd>
+                @Html.TextAreaFor(model => model.NewSublocationDescription, new
+                {
+                    @class = "form-control",
+                    rows = 5
+                } )
+                @Html.ValidationMessageFor(model => model.NewSublocationDescription, "", new { @class = "text-danger" })
+            </dd>
+        </dl>
+
+        <input type="submit" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Index", new { locationId = Model.LocationID }, new { onclick = "return confirm('This will discard any changes you have made. Continue?');", @class = "btn btn-secondary" })
+    }
+
+</div>

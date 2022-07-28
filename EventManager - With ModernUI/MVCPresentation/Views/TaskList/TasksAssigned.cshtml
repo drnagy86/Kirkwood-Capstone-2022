@@ -1,0 +1,71 @@
+﻿@model MVCPresentation.Models.TaskAssignmentViewModel
+
+@{
+    ViewBag.Title = "Tasks Assigned";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<div class="col w-100">
+    <div class="d-flex flex-row justify-content-center">
+        <h2 class="mt-4">My Tasks</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("~/Views/Event/EventNavBar.cshtml", Model.EventID)
+    </div>
+    <div class="col-md-9 col-sm-12">
+        @if (Model.Tasks == null)
+        {
+            <br />
+            <h4>No Tasks Assigned</h4>
+        }
+        else
+        {
+            <div class="row table-responsive-md">
+                <table class="table table-hover" id="ListTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="d-flex ">
+                                    <p class="text-start text-nowrap me-2">Name</p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex ">
+                                    <p class="text-start text-nowrap me-2">Description</p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex ">
+                                    <p class="text-start text-nowrap me-2">Due Date</p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex ">
+                                    <p class="text-start text-nowrap me-2">Priority</p>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataObjects.Tasks task in Model.Tasks)
+                        {
+                            if (!task.isDone && task.Active)
+                            {
+                                <tr>
+                                    <td>@task.Name</td>
+                                    <td>@task.Description</td>
+                                    <td>@task.DueDate.ToString()</td>
+                                    <td>@task.Priority</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

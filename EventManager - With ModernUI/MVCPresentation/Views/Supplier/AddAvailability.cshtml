@@ -1,0 +1,61 @@
+﻿@model DataObjects.Availability
+@{
+    ViewBag.Title = "Add Availability";
+    int supplierID = ViewBag.SupplierID;
+}
+
+<div class="row">
+    <h2 class="text-center mt-4">Add Availability</h2>
+</div>
+<div class="row">
+
+
+    <div class="col-md-2"></div>
+    <div class="row mt-3 col-md">
+        @using (Html.BeginForm("CreateAvailability", "Supplier"))
+        {
+            <fieldset>
+                <div class="form-group m-1">
+                    <div class="row mx-sm-auto">
+                        <label class="col-md-2 col-form-label text-md-end">Starting Time:</label>
+                        <span class="col-md-6">@Html.EditorFor(m => m.TimeStart, new { @class = "form-control", @type = "time" })</span>
+                    </div>
+                    <div class="row mx-sm-auto height-30px">
+                        <span class="col-md-2"> </span>
+                        <span class="text-danger col ">@Html.ValidationMessageFor(m => m.TimeStart)</span>
+                    </div>
+                </div>
+                <div class="form-group m-1">
+                    <div class="row mx-sm-auto">
+                        <label class="col-md-2 col-form-label text-md-end">Ending Time:</label>
+                        <span class="col-md-6">@Html.EditorFor(m => m.TimeEnd, new { @class = "form-control", @type = "time" })</span>
+                    </div>
+                    <div class="row mx-sm-auto height-30px">
+                        <span class="col-md-2"> </span>
+                        <span class="text-danger col ">@Html.ValidationMessageFor(m => m.TimeEnd)</span>
+                    </div>
+                </div>
+                <div class="form-group m-1">
+                    <span class="row mx-sm-auto justify-content-md-center">
+                        <label class="col-md-auto text-md-center">Sunday<br />@Html.CheckBoxFor(m => m.Sunday)</label>
+                        <label class="col-md-auto text-md-center">Monday<br />@Html.CheckBoxFor(m => m.Monday)</label>
+                        <label class="col-md-auto text-md-center">Tuesday<br />@Html.CheckBoxFor(m => m.Tuesday)</label>
+                        <label class="col-md-auto text-md-center">Wednesday<br />@Html.CheckBoxFor(m => m.Wednesday)</label>
+                        <label class="col-md-auto text-md-center">Thursday<br />@Html.CheckBoxFor(m => m.Thursday)</label>
+                        <label class="col-md-auto text-md-center">Friday<br />@Html.CheckBoxFor(m => m.Friday)</label>
+                        <label class="col-md-auto text-md-center">Saturday<br />@Html.CheckBoxFor(m => m.Saturday)</label>
+                    </span>
+                </div>
+                @Html.Hidden("ForeignID", supplierID)
+                <div class="form-group mt-5">
+                    <div class="row mx-sm-auto">
+                        <span class="col-md-2"></span>
+                        <span class="col-md-2 mx-2"><input type="submit" value="Create" class="btn btn-primary" /></span>
+                        <span class="col-md-2 mx-2">@Html.ActionLink("Cancel", "ViewSupplierSchedule", "Supplier", routeValues: new { supplierID = ViewBag.SupplierID }, htmlAttributes: new { @class = "btn btn-danger", onclick = "return confirm('Are you sure want to cancel?');" })</span>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model MVCPresentation.Models.SublocationModel
+@{
+    ViewBag.Title = "Tadpole: Area Index";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+<div class="d-flex flex-row justify-content-center">
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+    <h2 class="mt-4">@Html.DisplayFor(model => model.LocationName)</h2>
+</div>
+
+<hr />
+@if (ViewBag.Error != null)
+{
+    <p class="alert alert-danger">ViewBag.Error</p>
+}
+<div class="row">
+    <div class="col-md-3">
+        @Html.Action("LocationNav", "Location", new { locationId = Model.LocationID })
+    </div>
+    <div class="col-11 col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="d-table-cell">
+                        Name
+                    </th>
+                    <th class="d-table-cell">
+                        Description
+                    </th>
+
+                    @if (Model.CanEdit)
+                    {
+                        <th class="d-table-cell">Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Sublocations)
+                {
+
+                    <tr>
+                        <td class="d-table-cell">
+                            @Html.DisplayFor(modelItem => item.SublocationName)
+                        </td>
+                        <td class="d-table-cell">
+                            @if(item.SublocationDescription != null) { 
+                                @Html.DisplayFor(modelItem => item.SublocationDescription)
+                            } else
+                            {
+                                @Html.Display(" ");
+                            }
+                        </td>
+                        @if (Model.CanEdit)
+                        {
+                            <td class="d-table-cell">
+                                @Html.ActionLink("Edit", "Edit", new { sublocationId = item.SublocationID }, new { @class = "btn btn-secondary" })
+                                @using (Html.BeginForm("Delete", "Sublocation"))
+                                {
+                                    @Html.Hidden("locationId", item.LocationID)
+                                    @Html.Hidden("sublocationId", item.SublocationID)
+                                    <input class="btn btn-secondary" type="submit" value="Delete" onclick="return confirm('Are you sure want to delete this area?')"/>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+            
+            
+
+        </table>
+        @if (Model.CanEdit)
+        {
+            @Html.ActionLink("Create", "Create", "Sublocation", new { Model.LocationID }, new { @class = "btn btn-primary" })
+        }
+    </div>
+    
+</div>
+
+
+
+
+

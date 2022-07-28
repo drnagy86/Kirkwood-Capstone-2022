@@ -1,0 +1,68 @@
+﻿@model MVCPresentation.Models.ViewEntrancesModel
+
+@{
+    ViewBag.Title = "Tadpole - Entrances";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+
+<div class="d-flex flex-row justify-content-center">
+    @Html.ValidationMessage("", new { @class = "text-danger" })
+    <h2 class="mt-4">@Html.DisplayFor(model => model.LocationName)</h2>
+</div>
+
+<hr />
+@if (ViewBag.Error != null)
+{
+    <p class="alert alert-danger">ViewBag.Error</p>
+}
+<div class="row pt-4">
+    <div class="col-md-3">
+        @Html.Action("LocationNav", "Location", new { locationId = Model.LocationID })
+    </div>
+    <div class="col-12 col-md-8">
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Entrances)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntranceName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EntranceEdit", new { locationID = item.LocationID, entranceID = item.EntranceID }, new { @class = "btn btn-secondary" })
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("EntranceDelete", "Location", FormMethod.Post))
+                        {
+                            @Html.Hidden("locationID", item.LocationID);
+                            @Html.Hidden("entranceID", item.EntranceID);
+                            <input type="submit" value="Delete" class="btn btn-secondary" onclick="return confirm('Are you sure you want to remove this entrance?');" />
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <p>
+            @Html.ActionLink("Create New", "EntranceCreate", new { locationID = Model.LocationID }, new { @class = "btn btn-secondary" })
+        </p>
+    </div>
+</div>

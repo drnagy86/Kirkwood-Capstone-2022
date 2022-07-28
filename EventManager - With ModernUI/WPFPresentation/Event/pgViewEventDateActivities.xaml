@@ -1,0 +1,37 @@
+﻿<Page x:Class="WPFPresentation.Event.pgViewEventDateActivities"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation.Event"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgViewEventDateActivities" Background="White" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtSearch" Grid.Row="0" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Right" Margin="0,0,58,0" BorderBrush="#FF4388CC" Background="White" Foreground="#FF4388CC">Search</TextBox>
+        <Button x:Name="btnFind" Grid.Row="0" Grid.Column="1" Width="50" Height="31" HorizontalAlignment="Right" Margin="0,0,10,0" Background="#FF4388CC" Foreground="White">Find</Button>
+        <Label x:Name="lblActivityEventName" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24">Event Activities</Label>
+        <Button x:Name="btnAddEdit" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 10 0" Background="#FF4388CC" Foreground="White">Add/Edit</Button>
+        <DataGrid x:Name="datEventDateActivities" Grid.Row="2" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime, StringFormat=\{0:H:mm tt\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="End Time" Binding="{Binding EndTime, StringFormat=\{0:H:mm tt\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Activity" Binding="{Binding ActivityName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding ActivityDescription}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Public" Binding="{Binding PublicActivity}"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding ActivitySublocation.SublocationName}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="lblNoActivities" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="0 50 0 0" Height="40" VerticalAlignment="Top"></Label>
+    </Grid>
+</Page>

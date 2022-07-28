@@ -1,0 +1,119 @@
+﻿@model MVCPresentation.Models.ItineraryViewModel
+
+@{
+    ViewBag.Title = "Itinerary";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+    int eventId = ViewBag.EventId;
+    string eventName = ViewBag.EventName;
+}
+
+<meta charset="utf-8" />
+<div class="col w-100">
+    <div class="d-flex flex-row justify-content-center">
+        <h2 class="mt-4">@eventName</h2>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            @Html.Partial("EventNavBar", eventId)
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="d-flex flex-row">
+                <h2 class="">Itinerary</h2>
+            </div>
+            @if (Model.Activities.Count() > 0)
+            {
+                <div class="row table-responsive-md">
+                    <table class="table table-hover" id="ListTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="d-flex ">
+                                        <p class="text-start text-nowrap me-2">Date</p>
+                                        <button onclick="sortTable(0)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="d-flex ">
+                                        <p class="text-start text-nowrap me-2">Activity</p>
+                                        <button onclick="sortTable(1)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th scope="col" class="d-none d-sm-table-cell">
+                                    <div class="d-flex">
+                                        <p class="text-start text-nowrap me-2">Description</p>
+                                        <button onclick="sortTable(2)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th scope="col" class="d-none d-sm-table-cell">
+                                    <div class="d-flex ">
+                                        <p class="text-start text-nowrap me-2">Start</p>
+                                        <button onclick="sortTable(3)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th scope="col" class="d-none d-sm-table-cell">
+                                    <div class="d-flex ">
+                                        <p class="text-start text-nowrap me-2">End</p>
+                                        <button onclick="sortTable(4)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th scope="col" class="d-none d-sm-table-cell">
+                                    <div class="d-flex ">
+                                        <p class="text-start text-nowrap me-2">Public</p>
+                                        <button onclick="sortTable(5)" class="btn btn-sm btn-outline-dark ms-auto">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        @foreach (DataObjects.ActivityVM activity in Model.Activities)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.DisplayEventDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.ActivityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.ActivityDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.DisplayTimeStart)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.DisplayTimeEnd)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => activity.PublicActivity)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <div class="pagination justify-content-center">
+                        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Itinerary", "Event", new { eventID = eventId, page = x }))
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <p class="m-2 me-auto text-info">No activities found for this event.</p>
+            }
+        </div>
+    </div>
+</div>

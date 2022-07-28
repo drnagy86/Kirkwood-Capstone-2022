@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6F741EC-3488-48D6-B56B-E4E521E21DE6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WPFPresentation</RootNamespace>
+    <AssemblyName>WPFPresentation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="netstandard" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CustomControls\SpecificStartAndEndTimesComboBox.xaml.cs">
+      <DependentUpon>SpecificStartAndEndTimesComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TimeComboBoxes.xaml.cs">
+      <DependentUpon>TimeComboBoxes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Duplicate\pgDuplicateEvent.xaml.cs">
+      <DependentUpon>pgDuplicateEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgCreateActivity.xaml.cs">
+      <DependentUpon>pgCreateActivity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgCreateEvent.xaml.cs">
+      <DependentUpon>pgCreateEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgEventEditDetail.xaml.cs">
+      <DependentUpon>pgEventEditDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgEventFrame.xaml.cs">
+      <DependentUpon>pgEventFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgTaskListCreate.xaml.cs">
+      <DependentUpon>pgTaskListCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgTaskListEdit.xaml.cs">
+      <DependentUpon>pgTaskListEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgTaskListView.xaml.cs">
+      <DependentUpon>pgTaskListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgViewActivities.xaml.cs">
+      <DependentUpon>pgViewActivities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgViewActivityDetails.xaml.cs">
+      <DependentUpon>pgViewActivityDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgViewEventDateActivities.xaml.cs">
+      <DependentUpon>pgViewEventDateActivities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Event\pgViewEvents.xaml.cs">
+      <DependentUpon>pgViewEvents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IImageHelper.cs" />
+    <Compile Include="ImageHelperDevelopment.cs" />
+    <Compile Include="Location\pgAddEditEntrance.xaml.cs">
+      <DependentUpon>pgAddEditEntrance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgLocationDetails.xaml.cs">
+      <DependentUpon>pgLocationDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgLocationEntrance.xaml.cs">
+      <DependentUpon>pgLocationEntrance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgLocationFrame.xaml.cs">
+      <DependentUpon>pgLocationFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgLocationSchedule.xaml.cs">
+      <DependentUpon>pgLocationSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgLocationSublocations.xaml.cs">
+      <DependentUpon>pgLocationSublocations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgParkingLot.xaml.cs">
+      <DependentUpon>pgParkingLot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location\pgViewLocations.xaml.cs">
+      <DependentUpon>pgViewLocations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManagerProvider.cs" />
+    <Compile Include="RegisterUser.xaml.cs">
+      <DependentUpon>RegisterUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgSupplierDetails.xaml.cs">
+      <DependentUpon>pgSupplierDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgSupplierFrame.xaml.cs">
+      <DependentUpon>pgSupplierFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgSupplierPricing.xaml.cs">
+      <DependentUpon>pgSupplierPricing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgSupplierSchedule.xaml.cs">
+      <DependentUpon>pgSupplierSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgViewSupplierListing.xaml.cs">
+      <DependentUpon>pgViewSupplierListing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\pgViewSuppliers.xaml.cs">
+      <DependentUpon>pgViewSuppliers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatePasswordWindow.xaml.cs">
+      <DependentUpon>UpdatePasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Volunteer\pgViewAllVolunteers.xaml.cs">
+      <DependentUpon>pgViewAllVolunteers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Volunteer\pgViewVolunteerDetails.xaml.cs">
+      <DependentUpon>pgViewVolunteerDetails.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomControls\SpecificStartAndEndTimesComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Volunteer\pgViewVolunteerSchedule.xaml.cs">
+      <DependentUpon>pgViewVolunteerSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Volunteer\pgVolunteerFrame.xaml.cs">
+      <DependentUpon>pgVolunteerFrame.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomControls\TimeComboBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Duplicate\pgDuplicateEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgCreateActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgEventEditDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgEventFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgTaskListCreate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Event\pgTaskListEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgTaskListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgViewActivityDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgViewEventDateActivities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgAddEditEntrance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgLocationDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgLocationEntrance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgLocationFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgLocationSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgLocationSublocations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgParkingLot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location\pgViewLocations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgViewActivities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Event\pgCreateEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Event\pgViewEvents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgSupplierDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgSupplierFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgSupplierPricing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgSupplierSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgViewSupplierListing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Supplier\pgViewSuppliers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UpdatePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Volunteer\pgViewAllVolunteers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Volunteer\pgViewVolunteerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Volunteer\pgViewVolunteerSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Volunteer\pgVolunteerFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessFakes\DataAccessFakes.csproj">
+      <Project>{1a057f98-1aaf-4a39-82b3-ba1c36cffdaf}</Project>
+      <Name>DataAccessFakes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessInterfaces\DataAccessInterfaces.csproj">
+      <Project>{c1ec5e7d-a97b-464e-b261-3fbc396fe912}</Project>
+      <Name>DataAccessInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+      <Project>{b6f29fed-5ce3-4342-943f-032421c38fa4}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicLayerInterfaces\LogicLayerInterfaces.csproj">
+      <Project>{693568dd-60bf-4d9e-a819-e5077e5539f8}</Project>
+      <Name>LogicLayerInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicLayer\LogicLayer.csproj">
+      <Project>{65263851-45fb-4eb0-82ae-ea8d42d87fc5}</Project>
+      <Name>LogicLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI">
+      <Version>0.9.4</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

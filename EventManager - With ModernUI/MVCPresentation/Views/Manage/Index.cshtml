@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@model MVCPresentation.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "Manage";
+    ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var user = userManager.FindById(User.Identity.GetUserId());
+
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+        @if (Request.IsAuthenticated || User.IsInRole("Open Volunteer") || User.IsInRole("Specific Volunteer")@*Roles.GetRolesForUser(user.UserName).Contains("Open Volunteer") || Roles.GetRolesForUser(user.UserName).Contains("Specific Volunteer")*@)
+        {
+            <dt>Volunteer Links:</dt>
+            <dd>@Html.ActionLink("View incoming volunteer requests", "ViewRequests", "Volunteer", routeValues: null, htmlAttributes: new { @class = "nav-link" })</dd>
+
+        }
+        @if(User.IsInRole("Supplier"))
+        {
+            <dt>Supplier Links:</dt>
+            <dd>@Html.ActionLink("View your supplier listings", "ViewUserSuppliers", "Supplier", routeValues: new { userId = user.UserID }, htmlAttributes: new { @class = "nav-link" })</dd>
+        }
+    </dl>
+</div>

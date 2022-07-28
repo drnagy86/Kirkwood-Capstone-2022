@@ -1,0 +1,101 @@
+﻿@model DataObjects.ActivityVM
+@{
+    ViewBag.Title = "Itinerary Details";
+}
+
+<div class="col w-100">
+    <div class="d-flex mt-2">
+        <nav class="col-md-2 me-auto" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">@Html.ActionLink("Event Itineraries", "ItineraryList", "Event", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+        @Html.ValidationMessage("", new { @class = "text-danger" })
+        <h2 class="mt-4">@Model.ActivityName</h2>
+
+        @if (Request.IsAuthenticated)
+        {
+            if (User.IsInRole("EventPlanner"))
+            {
+                <div class="offset-8 d-flex flex-row mt-4">
+                    @Html.ActionLink("Edit", null, null, new { @class = "btn btn-sm btn-outline-info m-1" })
+                </div>
+            }
+        }
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="justify-content-end">
+            <h4 class="text-center">From: &nbsp; @Model.StartTime.ToShortTimeString() &nbsp; To: &nbsp; @Model.EndTime.ToShortTimeString()</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="justify-content-end mt-1">
+            <h4 class="text-center">On: &nbsp; @Model.EventDateID.ToLongDateString()</h4>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row justify-content-center">
+        <div>
+            @if (Model.PublicActivity == true)
+            {
+                <h5 class="text-center fw-bold">Public Activity</h5>
+            }
+            else
+            {
+                <h5 class="text-center fw-bold">Private Activity</h5>
+            }
+        </div>
+        <div class="d-flex flex-row">
+        </div>
+        @if (Model.ActivityDescription is null || Model.ActivityDescription.Length == 0) { }
+        else
+        {
+            <textarea readonly class="w-50">@Model.ActivityDescription</textarea>
+        }
+    </div>
+
+    <div class="row mt-3">
+        <div class="d-flex flex-row justify-content-center">
+            <div class="mt-2">
+                <h5>@Model.SublocationName &nbsp; - &nbsp;</h5>
+            </div>
+            @Html.ActionLink("View Sublocation", null, new { id = Model.SublocationID }, new { @class = "btn btn-sm btn-outline-info m-1" })
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row mt-2">
+        <div class="d-flex flex-row justify-content-center">
+            <h4>Activity Photo:</h4>
+        </div>
+        <div class="d-flex flex-row">
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            @if (Model.ActivityImageName is null || Model.ActivityImageName is "")
+            {
+                <div>
+                    <p>No Photo Available :(</p>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <img src="~/Content/Images/LocationImages/@Model.ActivityImageName" class="w-100" />
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+

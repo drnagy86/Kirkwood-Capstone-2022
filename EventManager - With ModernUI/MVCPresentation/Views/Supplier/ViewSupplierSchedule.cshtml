@@ -1,0 +1,320 @@
+﻿<!-- --------------------------------------------------------------------------------------------------------- -->
+<!-- Entire Calendar Control used from SOURCE CODE LINK: view-source:https://fullcalendar.io/docs/initialize-globals-demo -->
+<!-- BROWSER LINK: https://fullcalendar.io/docs/initialize-globals-demo -->
+<!-- JSDELIVR LINK: https://www.jsdelivr.com/package/npm/fullcalendar -->
+<!-- UNDER USE OF THE MIT LICENSE -->
+<!-- --------------------------------------------------------------------------------------------------------- -->
+@model MVCPresentation.Models.SupplierScheduleViewModel
+@{
+    ViewBag.Title = "Supplier Schedule";
+    Layout = "~/Views/Shared/_SupplierDetailsLayout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+<script>
+    var events = [];
+    var availability = [];
+    var calendar;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetActivities", new { id = Model.Supplier.SupplierID })',
+            success: function (event) {
+                $.each(event, function (i, v) {
+                    events.push({
+                        title: v.ActivityName,
+                        description: v.ActivityDescription,
+                        start: moment(v.StartTime).format(),
+                        end: moment(v.EndTime).format()
+                    });
+                })
+                GenerateCalendar(events);
+            },
+            error: function (error) {
+                alert('Could not load suppliers events.');
+            }
+        });
+
+        function GenerateCalendar(events) {
+            var calendarEl = document.getElementById('calendar');
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                contentHeight: 500,
+                events: events,
+                nowIndicator: true,
+                eventDisplay: 'block',
+                dayMaxEventRows: true,
+                eventTimeFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    //hour12: true
+                },
+                @*businessHours: {
+                    daysOfWeek: [1, 2, 3, 4],
+                    startTime: '8:00',
+                    endTime: '18:00',
+                },*@
+                buttonText: {
+                    today: 'Today',
+                    month: 'Month',
+                    week: 'Week',
+                    day: 'Day',
+                    list: 'List',
+                    agenda: 'Agenda'
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                eventClick: function (e) {
+                    var dialog = document.getElementById('calDialog');
+
+                    document.getElementById('eventName').innerHTML = e.event.title;
+                    document.getElementById('start').innerHTML = 'Starts: ' + moment(e.event.start).format("LLL");
+                    document.getElementById('end').innerHTML = 'Ends: ' + moment(e.event.end).format("LLL");
+                    if (e.event.extendedProps.description != null) {
+                        document.getElementById('description').innerHTML = e.event.extendedProps.description;
+                    }
+
+                    dialog.showModal();
+                },
+                datesSet: function (info) {
+                    if (info.view.type == 'timeGridWeek') {
+                        //alert('The first date on display is: ' + moment(info.view.activeStart).format("L"));
+                        //alert('The last date on display is: ' + moment(info.view.activeEnd).format("L"));
+                        document.getElementById("availabilityTable").style.display = "table";
+                        GenerateAvailability();
+                    }
+                    else {
+                        document.getElementById("availabilityTable").style.display = "none";
+                    }
+                }
+
+            });
+            var view = calendar.view;
+            // THE WAY TO CHANGE THE CALENDARS PROPERTIES
+            //calendar.setOption('eventDisplay', 'auto');
+            //alert("View is " + view.currentStart);
+            calendar.render();
+        };
+
+        function GenerateAvailability() {
+            var model = @Html.Raw(Json.Encode(Model.Availability));
+            var modelForException = @Html.Raw(Json.Encode(Model.AvailabilityException));
+
+            // NECESSARY FOR THE DATES TO 'RESET' WHEN MOVING TO A DATE THAT ORIGINALLY HAD NO DATE TO A DATE
+            // WITH VALUES
+            document.getElementById('sundayStart').innerHTML = "";
+            document.getElementById('sundayEnd').innerHTML = "";
+            document.getElementById('mondayStart').innerHTML = "";
+            document.getElementById('mondayEnd').innerHTML = "";
+            document.getElementById('tuesdayStart').innerHTML = "";
+            document.getElementById('tuesdayEnd').innerHTML = "";
+            document.getElementById('wednesdayStart').innerHTML = "";
+            document.getElementById('wednesdayEnd').innerHTML = "";
+            document.getElementById('thursdayStart').innerHTML = "";
+            document.getElementById('thursdayEnd').innerHTML = "";
+            document.getElementById('fridayStart').innerHTML = "";
+            document.getElementById('fridayEnd').innerHTML = "";
+            document.getElementById('saturdayStart').innerHTML = "";
+            document.getElementById('saturdayEnd').innerHTML = "";
+
+            // DISPLAYS THE AVAILABILITY SUNDAY - SATURDAY W/O THE EXCEPTION DATES
+            for (let i = 0; i < model.length; i++) {
+                if (model[i].Sunday) {
+                    document.getElementById('sundayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('sundayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Monday) {
+                    document.getElementById('mondayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('mondayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Tuesday) {
+                    document.getElementById('tuesdayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('tuesdayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Wednesday) {
+                    document.getElementById('wednesdayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('wednesdayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Thursday) {
+                    document.getElementById('thursdayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('thursdayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Friday) {
+                    document.getElementById('fridayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('fridayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+                if (model[i].Saturday) {
+                    document.getElementById('saturdayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                    document.getElementById('saturdayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                }
+            }
+            // IF ANY EXCEPTION DATES ARE LISTED BY THE SUPPLIER, CHECKS THE LIST
+            // FOR ANY DATES MATCHING THE CURRENTLY VISIBLE CALENDAR
+            for (let i = 0; i < modelForException.length; i++)
+            {
+                if (moment(calendar.view.activeStart).format("L") <= moment(modelForException[i].DateID).format("L") &&
+                    moment(calendar.view.activeEnd).format("L") > moment(modelForException[i].DateID).format("L")) {
+                    switch (moment(modelForException[i].DateID).format("dddd")) {
+                        case "Sunday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('sundayStart').innerHTML = "";
+                                document.getElementById('sundayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('sundayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('sundayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Monday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('mondayStart').innerHTML = "";
+                                document.getElementById('mondayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('mondayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('mondayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Tuesday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('tuesdayStart').innerHTML = "";
+                                document.getElementById('tuesdayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('tuesdayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('tuesdayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Wednesday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('wednesdayStart').innerHTML = "";
+                                document.getElementById('wednesdayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('wednesdayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('wednesdayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Thursday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('thursdayStart').innerHTML = "";
+                                document.getElementById('thursdayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('thursdayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('thursdayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Friday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('fridayStart').innerHTML = "";
+                                document.getElementById('fridayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('fridayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('fridayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        case "Saturday":
+                            if (modelForException[i].TimeStart == null && modelForException[i].TimeEnd == null) {
+                                document.getElementById('saturdayStart').innerHTML = "";
+                                document.getElementById('saturdayEnd').innerHTML = "";
+                            } else {
+                                document.getElementById('saturdayStart').innerHTML = moment(modelForException[i].TimeStart).format("hh:mma");
+                                document.getElementById('saturdayEnd').innerHTML = moment(modelForException[i].TimeEnd).format("hh:mma");
+                            }
+                            break;
+                        //document.getElementById('sundayStart').innerHTML = moment(model[i].TimeStart).format("hh:mma");
+                        //document.getElementById('sundayEnd').innerHTML = moment(model[i].TimeEnd).format("hh:mma");
+                    }
+                }
+            }
+        };
+    });
+
+</script>
+
+<div class="row">
+    <div class="d-flex flex-row justify-content-center">
+        @if (Model.Supplier.Name == null || Model.Supplier.Name == "")
+        {
+            <h2 class="mt-4">Supplier's Schedule </h2>
+        }
+        else
+        {
+            <h2 class="mt-4">@Model.Supplier.Name's Schedule </h2>
+        }
+
+    </div>
+
+    <hr>
+    <div class="col-md-3">
+        @Html.Partial("SupplierNav", Model.Supplier.SupplierID)
+    </div>
+    <div class="col-md-8 col-sm-12">
+        <dialog id="calDialog">
+            <header>
+                <h2 id="eventName"></h2>
+            </header>
+            <main>
+                <p id="description"></p>
+                <p id="start"></p>
+                <p id="end"></p>
+            </main>
+            <form method="dialog">
+                <button>OK</button>
+            </form>
+        </dialog>
+        <div id='calendar'></div><br />
+        <div class="table-responsive">
+            <table class="table table-hover table" id="availabilityTable" style="display: table;">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Sunday</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Start:</td>
+                        <td id="sundayStart"></td>
+                        <td id="mondayStart"></td>
+                        <td id="tuesdayStart"></td>
+                        <td id="wednesdayStart"></td>
+                        <td id="thursdayStart"></td>
+                        <td id="fridayStart"></td>
+                        <td id="saturdayStart"></td>
+                    </tr>
+                    <tr>
+                        <td>End:</td>
+                        <td id="sundayEnd"></td>
+                        <td id="mondayEnd"></td>
+                        <td id="tuesdayEnd"></td>
+                        <td id="wednesdayEnd"></td>
+                        <td id="thursdayEnd"></td>
+                        <td id="fridayEnd"></td>
+                        <td id="saturdayEnd"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br />
+        @if (Request.IsAuthenticated)
+        {
+            if (User.IsInRole("Event Planner") || User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Add Availability", "AddAvailability", "Supplier", new { supplierID = Model.Supplier.SupplierID }, new { @class = "btn btn-outline-dark" })
+            }
+        }
+    </div>
+</div>

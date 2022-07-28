@@ -1,0 +1,441 @@
+﻿<Page x:Class="WPFPresentation.pgCreateEvent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentation" xmlns:uc="clr-namespace:WPFPresentation.CustomControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgCreateEvent"
+      >
+
+    <Grid>
+        <TabControl x:Name="tabsetCreateEvent">
+            <TabItem x:Name="tabCreateEvent" Header="Create">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="250"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="txtBlkCreateNewEvent" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}">Create New Event</TextBlock>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock  x:Name="lblEventTitle" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Title</TextBlock>
+                        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="txtBoxEventName" Margin="10px" Padding="5,5,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>
+
+                        <TextBlock x:Name="lblEventDescription" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Description</TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="txtBoxEventDescription" Margin="10px" Padding="5,5,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>
+
+                        <TextBlock  x:Name="lblTotalBudget" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Budget</TextBlock>
+                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="txtBoxTotalBudget" Margin="10px" Padding="5,5,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>
+                    </Grid>
+
+                    <Grid Grid.Row="4" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="btnEventNext" Grid.Row="0" Grid.Column="0" Margin="40,5" Content="Create Event" IsTabStop="False" Click="btnEventNext_Click" HorizontalAlignment="Right"/>
+                        <Button x:Name="btnEventCancel" Grid.Row="0" Grid.Column="1" Margin="40,5" Content="Cancel" HorizontalAlignment="Left" Click="btnEventCancel_Click"/>
+
+                    </Grid>
+
+                </Grid>
+
+            </TabItem>
+            <TabItem x:Name="tabAddEventDate" Header="Dates">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="txtBlkAddEventDateTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}">Select Date For Event</TextBlock>
+
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Event Date:</TextBlock>
+                        <!--<TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="10px" Padding="5,5,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>-->
+                        <DatePicker x:Name="datePickerEventDate" Grid.Row="1" Grid.Column="1"  Margin="10" Width="150"/>
+
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Start Time:</TextBlock>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed">
+                            <ComboBox x:Name="cmboxEventStartTimeHour"  VerticalAlignment="Center" Margin="10"/>
+                            <!--<TextBox x:Name="txtBoxEventStartTimeHour" Margin="10px" Height="10" Padding="5" TextWrapping="Wrap" HorizontalAlignment="Left" Width="10" TextChanged="txtBoxEventStartTimeHour_TextChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>-->
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" >:</TextBlock>
+                            <TextBox x:Name="txtBoxEventStartTimeMinute" Margin="10px" Padding="5" TextWrapping="Wrap" HorizontalAlignment="Left" Width="10" Height="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="txtBoxEventStartTimeMinute_TextChanged" ></TextBox>
+                            <ComboBox x:Name="cmbStartTimeAMPM" VerticalAlignment="Center" Margin="10" >
+                                <ComboBoxItem IsSelected="True">AM</ComboBoxItem>
+                                <ComboBoxItem>PM</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                            <uc:TimeComboBoxes x:Name="ucStartTime"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">End  Time:</TextBlock>
+                        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                            <!--<TextBox x:Name="txtBoxEventEndTimeHour" Margin="10px" Height="10" Padding="5" TextWrapping="Wrap" HorizontalAlignment="Left" Width="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="txtBoxEventEndTimeHour_TextChanged" ></TextBox>
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" >:</TextBlock>
+                            <TextBox x:Name="txtBoxEventEndTimeMinute" Margin="10px" Padding="5" TextWrapping="Wrap" HorizontalAlignment="Left" Width="10" Height="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="txtBoxEventEndTimeMinute_TextChanged" ></TextBox>
+                            <ComboBox x:Name="cmbEndTimeAMPM" VerticalAlignment="Center" Margin="10" >
+                                <ComboBoxItem IsSelected="True">AM</ComboBoxItem>
+                                <ComboBoxItem>PM</ComboBoxItem>
+                            </ComboBox>-->
+                            <uc:TimeComboBoxes x:Name="ucEndTime"/>
+                        </StackPanel>
+
+                        <Button  Grid.Row="4" Grid.Column="1" x:Name="btnEventDateAdd" Margin="10" Content="Add Date" IsTabStop="False" Click="btnEventDateAdd_Click" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" x:Name="txtBlockEventAddValidationMessage" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="#FFFF4040" Visibility="Hidden" ></TextBlock>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="txtBlkCurrentEventDates" Grid.Row="0" Grid.Column="0" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Visibility="Hidden">Currently Selected Dates</TextBlock>
+                        <DataGrid x:Name="datCurrentEventDates" Grid.Row="1" Grid.Column="0" Margin="10" SelectionMode="Single" ItemsSource="{Binding}" AutoGenerateColumns="False" Visibility="Hidden" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <!--<DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button>Hey</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>-->
+                                <!--Found out how to do this here:-->
+                                <!--https://stackoverflow.com/questions/7978249/date-formatting-in-wpf-datagrid-->
+
+                                <DataGridTextColumn Header="Date" Binding="{Binding EventDateID, StringFormat=\{0:MM/dd/yy \}}"/>
+                                <!--https://stackoverflow.com/questions/3159521/displaying-24hr-clock-in-wpf-datagrid/3161751-->
+                                <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime, StringFormat=\{0:hh:mm tt\}}"/>
+                                <DataGridTextColumn Header="End Time" Binding="{Binding EndTime, StringFormat=\{0:hh:mm tt\}}"/>
+                            </DataGrid.Columns>
+
+
+                        </DataGrid>
+
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="btnEventDateNext" Grid.Row="0" Grid.Column="0" Margin="40,5" Content="Next" IsTabStop="False" HorizontalAlignment="Right" Click="btnEventDateNext_Click"/>
+                        <Button x:Name="btnEventDateCancel" Grid.Row="0" Grid.Column="1" Margin="40,5" Content="Cancel" HorizontalAlignment="Left" Click="btnEventCancel_Click"/>
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabsetAddEventLocation" Header="Location">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock x:Name="lblSetEventLocation" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="Auto" Style="{StaticResource TitleTextBlockStyle}">Select Location</TextBlock>
+                    <TextBlock x:Name="lblExistingLocations" Grid.Row="1" Margin="10,0,0,0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">Locations:</TextBlock>
+                    <ComboBox x:Name="cboExistingLocations" Margin="40,0,40,0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="200" SelectionChanged="cboExistingLocations_SelectionChanged" 
+                              ItemsSource="{Binding}" DisplayMemberPath="Name"></ComboBox>
+                    <Button x:Name="btnAddCustomLocation" Grid.Row="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnAddCustomLocation_Click" >Add Custom Location</Button>
+                    
+                    <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition/>
+
+
+
+
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock x:Name="lblName" Grid.Row="0"  Margin="0 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="19" Width="37" >Name</TextBlock>
+                        <TextBox x:Name="txtBoxLocationName"  Grid.Row="0" TextWrapping="Wrap"  Width="250" HorizontalAlignment="Left"  Grid.Column="1" Height="35" IsReadOnly="True" />
+
+
+                        <TextBlock x:Name="lblStreet" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"  Height="19" Width="36" >Street</TextBlock>
+                        <TextBox x:Name="txtBoxStreet"  Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Width="250" HorizontalAlignment="Left" Height="35" IsReadOnly="True"/>
+
+
+
+                    </Grid>
+
+                    <Grid Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.85*" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblZip" Grid.Row="0" Grid.Column="3"  VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   Margin="0 0 10 0" >Zip</TextBlock>
+                        <TextBox x:Name="txtBoxZip" Height="35" Grid.Row="0" Width="125" TextWrapping="Wrap"  VerticalAlignment="Center" 
+                                 HorizontalAlignment="Center" Grid.Column="4" Margin="0,4,0,0" IsReadOnly="True" TextChanged="txtBoxZip_TextChanged"/>
+                        <TextBlock x:Name="lblCity" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="right" 
+                                   >City</TextBlock>
+                        <TextBox x:Name="txtBoxCity" Grid.Row="1" Height="35" TextWrapping="Wrap" Width="115" VerticalAlignment="Center" 
+                                 HorizontalAlignment="Center" Margin="10,0,10,0"  Grid.Column="2" IsReadOnly="True"/>
+
+                        <TextBlock x:Name="lblState" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  
+                                   Grid.Column="5" >State</TextBlock>
+                        <TextBox x:Name="cboState" Height="35" Grid.Row="1" Width="115" VerticalAlignment="Center" 
+                                  HorizontalAlignment="Center" Margin="10,0,10,0" Grid.Column="6"  IsReadOnly="True" ></TextBox>
+                        <!--<ComboBox x:Name="cboState" Height="35" Grid.Row="1" Width="115" VerticalAlignment="Center" 
+                                  HorizontalAlignment="Left" Grid.Column="6"  IsReadOnly="True">
+                             <ComboBoxItem Content="Alabama"  Tag="AL"/>
+                            <ComboBoxItem Content="Alaska" Tag="AK" />
+                            <ComboBoxItem Content="Arizona" Tag="AZ"/>
+                            <ComboBoxItem Content="Arkansas" Tag="AR"/>
+                            <ComboBoxItem Content="California" Tag="CA"/>
+                            <ComboBoxItem Content="Colorado" Tag="CO"/>
+                            <ComboBoxItem Content="Connecticut" Tag="CT"/>
+                            <ComboBoxItem Content="Delaware" Tag="DE"/>
+                            <ComboBoxItem Content="District of Columbia" Tag="DC"/>
+                            <ComboBoxItem Content="Florida" Tag="FL"/>
+                            <ComboBoxItem Content="Georgia" Tag="GA"/>
+                            <ComboBoxItem Content="Hawaii" Tag="HI"/>
+                            <ComboBoxItem Content="Idaho" Tag="ID"/>
+                            <ComboBoxItem Content="Illinois" Tag="IL"/>
+                            <ComboBoxItem Content="Indiana" Tag="IN"/>
+                            <ComboBoxItem Content="Iowa" Tag="IA"/>
+                            <ComboBoxItem Content="Kansas" Tag="KS"/>
+                            <ComboBoxItem Content="Kentucky" Tag="KY"/>
+                            <ComboBoxItem Content="Louisiana" Tag="LA"/>
+                            <ComboBoxItem Content="Maine" Tag="ME"/>
+                            <ComboBoxItem Content="Maryland" Tag="MD"/>
+                            <ComboBoxItem Content="Massachusetts" Tag="MA"/>
+                            <ComboBoxItem Content="Michigan" Tag="MI"/>
+                            <ComboBoxItem Content="Minnesota" Tag="MN"/>
+                            <ComboBoxItem Content="Mississippi" Tag="MS"/>
+                            <ComboBoxItem Content="Missouri" Tag="MO"/>
+                            <ComboBoxItem Content="Montana" Tag="MT"/>
+                            <ComboBoxItem Content="Nebraska" Tag="NE"/>
+                            <ComboBoxItem Content="Nevada" Tag="NV"/>
+                            <ComboBoxItem Content="New Hampshire" Tag="NH"/>
+                            <ComboBoxItem Content="New Jersey" Tag="NJ"/>
+                            <ComboBoxItem Content="New Mexico" Tag="NM"/>
+                            <ComboBoxItem Content="New York" Tag="NY"/>
+                            <ComboBoxItem Content="North Carolina" Tag="NC"/>
+                            <ComboBoxItem Content="North Dakota" Tag="ND"/>
+                            <ComboBoxItem Content="Ohio" Tag="OH"/>
+                            <ComboBoxItem Content="Oklahoma" Tag="OK"/>
+                            <ComboBoxItem Content="Oregan" Tag="OR"/>
+                            <ComboBoxItem Content="Pennsylvania" Tag="PA"/>
+                            <ComboBoxItem Content="Rhode Island" Tag="RI"/>
+                            <ComboBoxItem Content="South Carolina" Tag="SC"/>
+                            <ComboBoxItem Content="South Dakota" Tag="SD"/>
+                            <ComboBoxItem Content="Tennessee" Tag="TN"/>
+                            <ComboBoxItem Content="Texas" Tag="TX"/>
+                            <ComboBoxItem Content="Utah" Tag="UT"/>
+                            <ComboBoxItem Content="Vermont" Tag="VT"/>
+                            <ComboBoxItem Content="Virginia" Tag="VA"/>
+                            <ComboBoxItem Content="Washington" Tag="WA"/>
+                            <ComboBoxItem Content="West Virginia" Tag="WV"/>
+                            <ComboBoxItem Content="Wisconsin" Tag="WI"/>
+                            <ComboBoxItem Content="Wyoming" Tag="WY"/> 
+                        </ComboBox> -->
+
+                         <!--   <ComboBoxItem Content="Alabama" />
+                            <ComboBoxItem Content="Alaska"/>
+                            <ComboBoxItem Content="Arizona"/>
+                            <ComboBoxItem Content="Arkansas"/>
+                            <ComboBoxItem Content="California"/>
+                            <ComboBoxItem Content="Colorado"/>
+                            <ComboBoxItem Content="Connecticut"/>
+                            <ComboBoxItem Content="Delaware" Tag="DE"/>
+                            <ComboBoxItem Content="District of Columbia"/>
+                            <ComboBoxItem Content="Florida"/>
+                            <ComboBoxItem Content="Georgia"/>
+                            <ComboBoxItem Content="Hawaii"/>
+                            <ComboBoxItem Content="Idaho"/>
+                            <ComboBoxItem Content="Illinois"/>
+                            <ComboBoxItem Content="Indiana"/>
+                            <ComboBoxItem Content="Iowa"/>
+                            <ComboBoxItem Content="Kansas"/>
+                            <ComboBoxItem Content="Kentucky"/>
+                            <ComboBoxItem Content="Louisiana"/>
+                            <ComboBoxItem Content="Maine"/>
+                            <ComboBoxItem Content="Maryland"/>
+                            <ComboBoxItem Content="Massachusetts"/>
+                            <ComboBoxItem Content="Michigan"/>
+                            <ComboBoxItem Content="Minnesota"/>
+                            <ComboBoxItem Content="Mississippi"/>
+                            <ComboBoxItem Content="Missouri"/>
+                            <ComboBoxItem Content="Montana"/>
+                            <ComboBoxItem Content="Nebraska"/>
+                            <ComboBoxItem Content="Nevada"/>
+                            <ComboBoxItem Content="New Hampshire"/>
+                            <ComboBoxItem Content="New Jersey"/>
+                            <ComboBoxItem Content="New Mexico"/>
+                            <ComboBoxItem Content="New York"/>
+                            <ComboBoxItem Content="North Carolina"/>
+                            <ComboBoxItem Content="North Dakota"/>
+                            <ComboBoxItem Content="Ohio" />
+                            <ComboBoxItem Content="Oklahoma"/>
+                            <ComboBoxItem Content="Oregan"/>
+                            <ComboBoxItem Content="Pennsylvania"/>
+                            <ComboBoxItem Content="Rhode Island"/>
+                            <ComboBoxItem Content="South Carolina"/>
+                            <ComboBoxItem Content="South Dakota"/>
+                            <ComboBoxItem Content="Tennessee"/>
+                            <ComboBoxItem Content="Texas"/>
+                            <ComboBoxItem Content="Utah"/>
+                            <ComboBoxItem Content="Vermont"/>
+                            <ComboBoxItem Content="Virginia"/>
+                            <ComboBoxItem Content="Washington"/>
+                            <ComboBoxItem Content="West Virginia"/>
+                            <ComboBoxItem Content="Wisconsin"/>
+                            <ComboBoxItem Content="Wyoming" />
+                        </ComboBox> -->
+                        
+                    </Grid>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" x:Name="txtBlockLocationValidationMessage" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" Foreground="#FFFF4040"  Text="Error" Visibility="Hidden"/>
+                    <Button x:Name="btnEventLocationAdd" Grid.Row="5"  Grid.Column="1" Margin="0,27,80,8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Next"  Height="32" Width="60" Grid.RowSpan="2" Click="btnEventLocationAdd_Click"/>
+                    <Button x:Name="btnEventLocationCancel" Grid.Row="5"  Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,27,0,8" Content="Cancel" Height="32" Width="60" Grid.RowSpan="2" Click="btnEventCancel_Click"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabAddEventVolunteer" Header="Volunteers">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="txtBlkAddEventVolunteerTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}">Request Volunteers</TextBlock>
+
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox x:Name="chkBxNeedVolunteers" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Checked="chkBxNeedVolunteers_Checked" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Style="{StaticResource BodyTextBlockStyle}">Yes, I need Volunteers</TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="200*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="txtBlkNumVolunteers" Grid.Row="0" Grid.Column="0" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}" Visibility="Hidden" >Number:</TextBlock>
+                        <DockPanel x:Name="dcPnlNumVolunteers" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" Visibility="Hidden">
+                            <TextBox Text="{Binding ElementName=sldrNumVolunteers, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40"></TextBox>
+                            <Slider x:Name="sldrNumVolunteers" Maximum="10" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" ></Slider>
+                        </DockPanel>
+
+                        <Button x:Name="btnRequestVolunteers" Grid.Column="3" Grid.Row="2" Click="btnRequestVolunteers_Click" Visibility="Hidden">Request Volunteers</Button>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="btnVolunteersNext" Grid.Row="0" Grid.Column="0" Margin="40,5" Content="Finish" IsTabStop="False" HorizontalAlignment="Right" Click="btnVolunteersNext_Click"/>
+                        <Button x:Name="btnVolunteersCancel" Grid.Row="0" Grid.Column="1" Margin="40,5" Content="Cancel" HorizontalAlignment="Left" Click="btnEventCancel_Click"/>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
